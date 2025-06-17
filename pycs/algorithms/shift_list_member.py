@@ -29,18 +29,3 @@ def shift_list_member(values: list[int], pos_from: int, pos_to: int):
     if reverse_before_return:
         values = values[::-1]
     return values
-
-
-if __name__ == "__main__":
-
-    l1 = [1, 9, 3, 5, 4, 2, 4]
-    # pos_from = 5
-    # pos_to = 1
-    # res_exp = [1, 2, 9, 3, 5, 4, 4]
-    pos_from = 1
-    pos_to = 5
-    res_exp = [1, 3, 5, 4, 2, 9, 4]
-    res = shift_list_member(values=l1, pos_from=pos_from, pos_to=pos_to)
-
-    print(f"{res}")
-    print(f"{res_exp}")

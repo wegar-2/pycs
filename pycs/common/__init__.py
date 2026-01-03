@@ -1,1 +1,1 @@
-from .types import PosInt, NonNegInt
+from .types import PosInt, NonNegInt, Encoding

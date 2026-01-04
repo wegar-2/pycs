@@ -1,7 +1,7 @@
 import logging
 from typing import Optional
 
-from pycs.data_structures.avl_tree_revision1.node import Node
+from pycs.revision.data_structures.avl_tree_revision1.node import Node
 
 logger = logging.getLogger(__name__)
 

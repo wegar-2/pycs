@@ -42,13 +42,13 @@ class AVLTree:
 
         if balance > 1 and key < node.left.key:
             return self._right_rotate(node=node)
-        elif balance > 1 and key > node.right.key:
+        if balance > 1 and key > node.left.key:
             node.left = self._left_rotate(node=node.left)
             return self._right_rotate(node=node)
-        elif balance < -1 and key < node.right.key:
+        if balance < -1 and key < node.right.key:
             node.right = self._right_rotate(node=node.right)
             return self._left_rotate(node=node)
-        elif balance < -1 and key > node.right.key:
+        if balance < -1 and key > node.right.key:
             return self._left_rotate(node=node)
 
         return node
@@ -56,25 +56,41 @@ class AVLTree:
     def insert(self, key: int):
         self.root = self._insert(node=self.root, key=key)
 
-    @staticmethod
-    def _right_rotate(node: Node) -> Node:
+    def _right_rotate(self, node: Node) -> Node:
         z = node
         y = node.left
         t3 = y.right
+        if t3 is not None:
+            print(f"{self._node_height(node=t3)=}")
 
         z.left = t3
         y.right = z
 
+        z.height = 1 + max(
+            self._node_height(z.left), self._node_height(node=z.right)
+        )
+        y.height = 1 + max(
+            self._node_height(y.left), self._node_height(node=y.right)
+        )
+
         return y
 
-    @staticmethod
-    def _left_rotate(node: Node) -> Node:
+    def _left_rotate(self, node: Node) -> Node:
         z = node
         y = node.right
         t2 = y.left
+        if t2 is not None:
+            print(f"{self._node_height(node=t2)=}")
 
         z.right = t2
         y.left = z
+
+        z.height = 1 + max(
+            self._node_height(z.left), self._node_height(node=z.right)
+        )
+        y.height = 1 + max(
+            self._node_height(y.left), self._node_height(node=y.right)
+        )
 
         return y
 
@@ -92,7 +108,7 @@ class AVLTree:
 
 if __name__ == "__main__":
 
-    nums = [10, 8, 1, 9, 11, 15, 12, 13]
+    nums = [10, 8, 1, 9, 11, 15, 12, 13, 17, 2, 99, 7, 6, 3, 5, 4, 32, 45, 33]
 
     tree = AVLTree()
 

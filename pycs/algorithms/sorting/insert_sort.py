@@ -1,11 +1,11 @@
-# from common import PosInt, NonNegInt
-#
-#
-# def insert_sort(values: list[int]) -> list[int]:
-#
-#     for i in range(1, len(values)):
-#
-#         for j in range(0, i+1):
-#
-#
-#     return values
+
+
+def insert_sort(nums: list[int]) -> list[int]:
+    for i in range(1, len(nums), 1):
+        value: int = nums[i]
+        j = i
+        while j > 0 and value < nums[j-1]:
+            nums[j] = nums[j-1]
+            j -= 1
+        nums[j] = value
+    return nums

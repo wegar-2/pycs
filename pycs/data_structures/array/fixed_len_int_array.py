@@ -34,6 +34,3 @@ class FixedLenIntArray:
         if i < 0 or i >= self._l:
             raise IndexError(f"Invalid array index {i} for array of length "
                              f"{self._l}")
-
-    def __iter__(self):
-        pass

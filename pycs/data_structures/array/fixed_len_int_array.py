@@ -2,11 +2,18 @@ from typing import Final
 
 
 class FixedLenIntArray:
+    """
+    Note: since __getitem__ is implemented this class is iterable
+    """
 
     def __init__(self, l: int):
         self._validate_is_positive_int(i=l)
         self._l: Final[int] = l
         self._data: list[int] = [0] * l
+
+    @property
+    def data(self):
+        return self._data
 
     def __len__(self) -> int:
         return self._l

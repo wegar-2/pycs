@@ -1,4 +1,3 @@
-from typing import Optional
 
 
 __all__ = ["merge_sort"]
@@ -28,14 +27,3 @@ def merge_sort(
     merge_sort(nums=left_nums)
     merge_sort(nums=right_nums)
     _merge(left=left_nums, right=right_nums, nums=nums)
-
-
-if __name__ == "__main__":
-    from pycs.common.testing import array_for_sorting
-    import copy
-    ar = array_for_sorting()
-    ar_cp = copy.deepcopy(ar)
-    merge_sort(nums=ar)
-    ar_srtd = sorted(ar_cp)
-
-    print(ar_srtd == ar)

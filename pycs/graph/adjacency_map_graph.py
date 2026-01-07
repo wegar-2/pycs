@@ -1,0 +1,61 @@
+from typing import TypeAlias, Any
+
+from pycs.graph.edge import Edge
+from pycs.graph.graph import Graph
+from pycs.graph.vertex import Vertex
+
+IncidenceMap: TypeAlias = dict[Vertex, Edge]
+
+
+class AdjacencyMapGraph(Graph):
+    """
+    directed graph!
+    """
+
+    def __init__(self):
+        self._outgoing: dict[Vertex, IncidenceMap] = {}
+        self._incoming: dict[Vertex, IncidenceMap] = {}
+
+    def insert_vertex(self, v: Vertex) -> None:
+        if v not in self._outgoing:
+            self._outgoing[v] = {}
+        if v not in self._incoming:
+            self._incoming[v] = {}
+
+    def insert_edge(self, o: Vertex, d: Vertex, x: Any) -> None:
+        e: Edge = Edge(o, d, x)
+        self._outgoing[o][d] = e
+        self._incoming[d][o] = e
+
+    def vertex_count(self) -> int:
+        return len(self._outgoing)
+
+    def edge_count(self) -> int:
+        return sum([len(self._outgoing[v]) for v in self._outgoing])
+
+    def edges(self) -> list[Edge]:
+        pass
+
+    def vertices(self) -> list[Vertex]:
+        pass
+
+    def get_edge(self, u: Vertex, v: Vertex) -> Edge | None:
+        pass
+
+    def remove_edge(self, e: Edge) -> None:
+        pass
+
+    def remove_vertex(self, v: Vertex) -> None:
+        pass
+
+    def in_degree(self, v: Vertex) -> int:
+        return len(self._incoming[v])
+
+    def out_degree(self, v: Vertex) -> int:
+        return len(self._outgoing[v])
+
+    def degree(self, v: Vertex) -> int:
+        return self.in_degree(v) + self.out_degree(v)
+
+    def incident_edges(self, v: Vertex) -> list[Edge]:
+        pass

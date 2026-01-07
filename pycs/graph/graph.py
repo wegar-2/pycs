@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import Any
 
 from pycs.graph.edge import Edge
 from pycs.graph.vertex import Vertex
@@ -31,6 +32,14 @@ class Graph(ABC):
         pass
 
     @abstractmethod
+    def in_degree(self, v: Vertex) -> int:
+        pass
+
+    @abstractmethod
+    def out_degree(self, v: Vertex) -> int:
+        pass
+
+    @abstractmethod
     def incident_edges(self, v: Vertex) -> list[Edge]:
         pass
 
@@ -43,7 +52,7 @@ class Graph(ABC):
         pass
 
     @abstractmethod
-    def insert_edge(self, u: Vertex, v: Vertex, e: Edge) -> None:
+    def insert_edge(self, o: Vertex, d: Vertex, x: Any) -> None:
         pass
 
     @abstractmethod

@@ -24,7 +24,7 @@ class Graph(ABC):
         pass
 
     @abstractmethod
-    def get_edge(self, u: Vertex, v: Vertex) -> Edge | None:
+    def get_edge(self, o: Vertex, d: Vertex) -> Edge | None:
         pass
 
     @abstractmethod

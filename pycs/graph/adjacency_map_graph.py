@@ -39,8 +39,12 @@ class AdjacencyMapGraph(Graph):
     def vertices(self) -> list[Vertex]:
         pass
 
-    def get_edge(self, u: Vertex, v: Vertex) -> Edge | None:
-        pass
+    def get_edge(self, u: Vertex, d: Vertex) -> Edge | None:
+        if u in self._outgoing:
+            if d in self._outgoing[u]:
+                return self._outgoing[u][d]
+            return None
+        return None
 
     def remove_edge(self, e: Edge) -> None:
         pass
@@ -58,4 +62,8 @@ class AdjacencyMapGraph(Graph):
         return self.in_degree(v) + self.out_degree(v)
 
     def incident_edges(self, v: Vertex) -> list[Edge]:
-        pass
+        return [
+            self._outgoing[v][k] for k in self._outgoing[v]
+        ] + [
+            self._incoming[v][k] for k in self._incoming[v]
+        ]

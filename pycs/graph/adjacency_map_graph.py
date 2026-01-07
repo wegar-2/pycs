@@ -34,10 +34,19 @@ class AdjacencyMapGraph(Graph):
         return sum([len(self._outgoing[v]) for v in self._outgoing])
 
     def edges(self) -> list[Edge]:
-        pass
+        return [
+            self._outgoing[o][d]
+            for o in self._outgoing
+            for d in self._outgoing[o]
+        ]
 
     def vertices(self) -> list[Vertex]:
-        pass
+        vertices: set[Vertex] = set()
+        for v in self._outgoing:
+            vertices.add(v)
+        for v in self._incoming:
+            vertices.add(v)
+        return [v for v in vertices]
 
     def get_edge(self, u: Vertex, d: Vertex) -> Edge | None:
         if u in self._outgoing:
@@ -47,10 +56,18 @@ class AdjacencyMapGraph(Graph):
         return None
 
     def remove_edge(self, e: Edge) -> None:
-        pass
+        if (o := e.origin) in self._outgoing:
+            if (d := e.destination) in self._outgoing[o]:
+                self._outgoing[o].pop(d)
+        if (d := e.destination) in self._incoming:
+            if (o := e.origin) in self._incoming[d]:
+                self._outgoing[d].pop(o)
 
     def remove_vertex(self, v: Vertex) -> None:
-        pass
+        if v in self._outgoing:
+            self._outgoing.pop(v)
+        if v in self._incoming:
+            self._incoming.pop(v)
 
     def in_degree(self, v: Vertex) -> int:
         return len(self._incoming[v])

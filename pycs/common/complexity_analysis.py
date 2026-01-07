@@ -1,5 +1,5 @@
 import math
-from typing import Final
+from typing import Callable, Final
 
 from pycs.common.types import NumeralSystem, Number
 
@@ -23,5 +23,12 @@ def make_input_sizes(
     return [math.floor(system_to_base[ns]**e) for e in exponents]
 
 
-def do_repeated_runs():
-    pass
+def do_repeated_runs(
+        algo: Callable,
+        algo_input_gen: Callable,
+        runs_num: int,
+        input_size: int
+):
+    run_times: list[float]
+    for _ in range(runs_num):
+        pass

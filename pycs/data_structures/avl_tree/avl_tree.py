@@ -3,6 +3,8 @@ from typing import Optional
 
 from pycs.data_structures.avl_tree.node import Node
 
+__all__ = ["AVLTree"]
+
 logger = logging.getLogger(__name__)
 
 

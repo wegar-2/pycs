@@ -1,5 +1,8 @@
 from abc import ABC, abstractmethod
 
+from pycs.graph.edge import Edge
+from pycs.graph.vertex import Vertex
+
 
 class Graph(ABC):
 
@@ -12,11 +15,37 @@ class Graph(ABC):
         pass
 
     @abstractmethod
-    def vertices(self) -> list:
+    def vertices(self) -> list[Vertex]:
         pass
 
     @abstractmethod
-    def edges(self) -> list:
+    def edges(self) -> list[Edge]:
         pass
 
-    
+    @abstractmethod
+    def get_edge(self, u: Vertex, v: Vertex) -> Edge | None:
+        pass
+
+    @abstractmethod
+    def degree(self, v: Vertex) -> int:
+        pass
+
+    @abstractmethod
+    def incident_edges(self, v: Vertex) -> list[Edge]:
+        pass
+
+    @abstractmethod
+    def insert_vertex(self, v: Vertex) -> None:
+        pass
+
+    @abstractmethod
+    def remove_vertex(self, v: Vertex) -> None:
+        pass
+
+    @abstractmethod
+    def insert_edge(self, u: Vertex, v: Vertex, e: Edge) -> None:
+        pass
+
+    @abstractmethod
+    def remove_edge(self, e: Edge) -> None:
+        pass

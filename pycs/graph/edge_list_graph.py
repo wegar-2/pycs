@@ -1,3 +1,5 @@
+from typing import Any
+
 from pycs.graph.edge import Edge
 from pycs.graph.graph import Graph
 from pycs.graph.vertex import Vertex
@@ -6,8 +8,13 @@ from pycs.graph.vertex import Vertex
 class EdgeListGraph(Graph):
 
     def __init__(self):
-        self._vertices: list[Vertex] = []
-        self._edges: list[Edge] = []
+        """
+        Although the class is called EdgeList, the vertices and edges are
+        stored in sets. This is necessary in order to ensure O(1) complexity
+        of insertions.
+        """
+        self._vertices: set[Vertex] = set()
+        self._edges: set[Edge] = set()
 
     def vertex_count(self) -> int:
         return len(self._vertices)
@@ -16,34 +23,52 @@ class EdgeListGraph(Graph):
         return len(self._edges)
 
     def vertices(self) -> list[Vertex]:
-        return self._vertices
+        return list(self._vertices)
 
     def edges(self) -> list[Edge]:
-        return self._edges
+        return list(self._edges)
 
     def get_edge(self, o: Vertex, d: Vertex) -> Edge | None:
-        pass
+        for e in self._edges:
+            if e.origin == o and e.destination == d:
+                return e
+        return None
 
     def degree(self, v: Vertex) -> int:
-        pass
+        n = 0
+        for e in self._edges:
+            if v in e.endpoints:
+                n += 1
+        return n
 
     def in_degree(self, v: Vertex) -> int:
-        pass
+        n = 0
+        for e in self._edges:
+            if v == e.destination:
+                n += 1
+        return n
 
     def out_degree(self, v: Vertex) -> int:
-        pass
+        n = 0
+        for e in self._edges:
+            if v == e.origin:
+                n += 1
+        return n
 
     def incident_edges(self, v: Vertex) -> list[Edge]:
-        pass
+        return [e for e in self._edges if v in e.endpoints]
 
     def insert_vertex(self, v: Vertex) -> None:
-        pass
+        self._vertices.add(v)
 
     def remove_vertex(self, v: Vertex) -> None:
-        pass
+        self._vertices.remove(v)
+        self._edges = {e for e in self._edges if v not in e.endpoints}
 
     def insert_edge(self, o: Vertex, d: Vertex, x: Any) -> None:
-        pass
+        self._vertices.add(o)
+        self._vertices.add(d)
+        self._edges.add(Edge(o, d, x))
 
     def remove_edge(self, e: Edge) -> None:
-        pass
+        self._edges.remove(e)

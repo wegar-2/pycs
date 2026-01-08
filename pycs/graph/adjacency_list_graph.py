@@ -1,0 +1,55 @@
+from typing import Any, TypeAlias
+
+from pycs.graph.edge import Edge
+from pycs.graph.graph import Graph
+from pycs.graph.vertex import Vertex
+
+
+EdgeList: TypeAlias = list[Edge]
+
+
+class AdjacencyListGraph(Graph):
+
+    def __init__(self):
+        self._incidence_colls_map: dict[Vertex, EdgeList] = {}
+
+    def vertex_count(self) -> int:
+        return len(self._incidence_colls_map)
+
+    def edge_count(self) -> int:
+        return sum([len(ic) for _, ic in self._incidence_colls_map.items()])
+
+    def vertices(self) -> list[Vertex]:
+        return list([v for v in self._incidence_colls_map])
+
+    def edges(self) -> list[Edge]:
+        return list({
+            e for v, edges in self._incidence_colls_map.items() for e in edges
+        })
+
+    def get_edge(self, o: Vertex, d: Vertex) -> Edge | None:
+        pass
+
+    def degree(self, v: Vertex) -> int:
+        pass
+
+    def in_degree(self, v: Vertex) -> int:
+        pass
+
+    def out_degree(self, v: Vertex) -> int:
+        pass
+
+    def incident_edges(self, v: Vertex) -> list[Edge]:
+        pass
+
+    def insert_vertex(self, v: Vertex) -> None:
+        pass
+
+    def remove_vertex(self, v: Vertex) -> None:
+        pass
+
+    def insert_edge(self, o: Vertex, d: Vertex, x: Any) -> None:
+        pass
+
+    def remove_edge(self, e: Edge) -> None:
+        pass

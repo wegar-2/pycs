@@ -34,26 +34,32 @@ class EdgeListGraph(Graph):
                 return e
         return None
 
-    def degree(self, v: Vertex) -> int:
-        n = 0
-        for e in self._edges:
-            if v in e.endpoints:
-                n += 1
-        return n
+    def degree(self, v: Vertex) -> int | None:
+        if v in self._vertices:
+            n = 0
+            for e in self._edges:
+                if v in e.endpoints:
+                    n += 1
+            return n
+        return None
 
-    def in_degree(self, v: Vertex) -> int:
-        n = 0
-        for e in self._edges:
-            if v == e.destination:
-                n += 1
-        return n
+    def in_degree(self, v: Vertex) -> int | None:
+        if v in self._vertices:
+            n = 0
+            for e in self._edges:
+                if v == e.destination:
+                    n += 1
+            return n
+        return None
 
-    def out_degree(self, v: Vertex) -> int:
-        n = 0
-        for e in self._edges:
-            if v == e.origin:
-                n += 1
-        return n
+    def out_degree(self, v: Vertex) -> int | None:
+        if v in self._vertices:
+            n = 0
+            for e in self._edges:
+                if v == e.origin:
+                    n += 1
+            return n
+        return None
 
     def incident_edges(self, v: Vertex) -> list[Edge]:
         return [e for e in self._edges if v in e.endpoints]

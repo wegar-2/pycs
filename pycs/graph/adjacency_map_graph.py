@@ -69,14 +69,26 @@ class AdjacencyMapGraph(Graph):
         if v in self._incoming:
             self._incoming.pop(v)
 
-    def in_degree(self, v: Vertex) -> int:
-        return len(self._incoming[v])
+    def in_degree(self, v: Vertex) -> int | None:
+        if v in self._incoming:
+            return len(self._incoming[v])
+        return None
 
-    def out_degree(self, v: Vertex) -> int:
-        return len(self._outgoing[v])
+    def out_degree(self, v: Vertex) -> int | None:
+        if v in self._outgoing:
+            return len(self._outgoing[v])
+        return None
 
-    def degree(self, v: Vertex) -> int:
-        return self.in_degree(v) + self.out_degree(v)
+    def degree(self, v: Vertex) -> int | None:
+        in_deg = self.in_degree(v)
+        out_deg = self.out_degree(v)
+        if in_deg is None and out_deg is None:
+            return None
+        else:
+            return (
+                    (in_deg if in_deg is not None else 0) +
+                    (out_deg if out_deg is not None else 0)
+            )
 
     def incident_edges(self, v: Vertex) -> list[Edge]:
         return [

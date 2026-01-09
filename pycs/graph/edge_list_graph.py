@@ -61,8 +61,10 @@ class EdgeListGraph(Graph):
             return n
         return None
 
-    def incident_edges(self, v: Vertex) -> list[Edge]:
-        return [e for e in self._edges if v in e.endpoints]
+    def incident_edges(self, v: Vertex) -> list[Edge] | None:
+        if v in self._vertices:
+            return [e for e in self._edges if v in e.endpoints]
+        return None
 
     def insert_vertex(self, v: Vertex) -> None:
         self._vertices.add(v)

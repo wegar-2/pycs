@@ -55,8 +55,10 @@ class AdjacencyListGraph(Graph):
             ])
         return 0
 
-    def incident_edges(self, v: Vertex) -> list[Edge]:
-        pass
+    def incident_edges(self, v: Vertex) -> list[Edge] | None:
+        if v in self._incidence_colls_map:
+            return self._incidence_colls_map[v]
+        return None
 
     def insert_vertex(self, v: Vertex) -> None:
         if v not in self._incidence_colls_map:

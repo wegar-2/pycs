@@ -90,9 +90,11 @@ class AdjacencyMapGraph(Graph):
                     (out_deg if out_deg is not None else 0)
             )
 
-    def incident_edges(self, v: Vertex) -> list[Edge]:
-        return [
-            self._outgoing[v][k] for k in self._outgoing[v]
-        ] + [
-            self._incoming[v][k] for k in self._incoming[v]
-        ]
+    def incident_edges(self, v: Vertex) -> list[Edge] | None:
+        if v in self._outgoing or v in self._incoming:
+            return [
+                self._outgoing[v][k] for k in self._outgoing[v]
+            ] + [
+                self._incoming[v][k] for k in self._incoming[v]
+            ]
+        return None

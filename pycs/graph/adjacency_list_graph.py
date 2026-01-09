@@ -28,7 +28,19 @@ class AdjacencyListGraph(Graph):
         })
 
     def get_edge(self, o: Vertex, d: Vertex) -> Edge | None:
-        pass
+
+        orig: bool = False
+        if o in self._incidence_colls_map:
+            orig = any([])
+
+        dest: bool = False
+
+
+        if orig and dest:
+            for e in self._incidence_colls_map[o]:
+                if e.origin == o and e.destination == d:
+                    return e
+        return None
 
     def degree(self, v: Vertex) -> int:
         pass
@@ -37,13 +49,18 @@ class AdjacencyListGraph(Graph):
         pass
 
     def out_degree(self, v: Vertex) -> int:
-        pass
+        if v in self._incidence_colls_map:
+            return len([
+                e for e in self._incidence_colls_map[v] if e.origin == v
+            ])
+        return 0
 
     def incident_edges(self, v: Vertex) -> list[Edge]:
         pass
 
     def insert_vertex(self, v: Vertex) -> None:
-        pass
+        if v not in self._incidence_colls_map:
+            self._incidence_colls_map[v] = []
 
     def remove_vertex(self, v: Vertex) -> None:
         pass

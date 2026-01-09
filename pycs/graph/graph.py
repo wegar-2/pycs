@@ -28,19 +28,19 @@ class Graph(ABC):
         pass
 
     @abstractmethod
-    def degree(self, v: Vertex) -> int:
+    def degree(self, v: Vertex) -> int | None:
         pass
 
     @abstractmethod
-    def in_degree(self, v: Vertex) -> int:
+    def in_degree(self, v: Vertex) -> int | None:
         pass
 
     @abstractmethod
-    def out_degree(self, v: Vertex) -> int:
+    def out_degree(self, v: Vertex) -> int | None:
         pass
 
     @abstractmethod
-    def incident_edges(self, v: Vertex) -> list[Edge]:
+    def incident_edges(self, v: Vertex) -> list[Edge] | None:
         pass
 
     @abstractmethod

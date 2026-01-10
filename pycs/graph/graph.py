@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any
+from typing import Any, Union
 
 from pycs.graph.edge import Edge
 from pycs.graph.vertex import Vertex
@@ -57,4 +57,8 @@ class Graph(ABC):
 
     @abstractmethod
     def remove_edge(self, e: Edge) -> None:
+        pass
+
+    @abstractmethod
+    def __contains__(self, item: Union[Edge, Vertex]) -> bool:
         pass

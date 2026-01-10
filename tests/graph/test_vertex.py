@@ -1,0 +1,25 @@
+from pycs.graph.vertex import Vertex
+
+
+def test_vertex_instantiation():
+    v = Vertex("A")
+    assert isinstance(v, Vertex)
+
+
+def test_vertex_element():
+    v = Vertex("A")
+    u = Vertex("B")
+    assert v.element == "A"
+    assert u.element == "B"
+
+
+def test_vertex_hash():
+    v = Vertex("A")
+    u = Vertex("A")
+    assert hash(v) == hash(u)
+
+
+def test_vertex_eq():
+    v = Vertex("A")
+    u = Vertex("A")
+    assert v == u

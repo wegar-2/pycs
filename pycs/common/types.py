@@ -10,3 +10,5 @@ Encoding: TypeAlias = Literal["utf8", "ascii"]
 NumeralSystem = Literal["binary", "decimal"]
 
 Number: TypeAlias = Union[int, float]
+
+Immutable: TypeAlias = Union[int, str, bool, bytes, tuple]

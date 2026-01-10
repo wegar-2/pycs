@@ -3,6 +3,7 @@ from typing import Any, Union
 
 from pycs.graph.edge import Edge
 from pycs.graph.vertex import Vertex
+from pycs.graph.exception import InvalidContainsException
 
 
 class Graph(ABC):
@@ -59,6 +60,10 @@ class Graph(ABC):
     def remove_edge(self, e: Edge) -> None:
         pass
 
-    @abstractmethod
     def __contains__(self, item: Union[Edge, Vertex]) -> bool:
-        pass
+        if isinstance(item, Edge):
+            return item in self.edges()
+        elif isinstance(item, Vertex):
+            return item in self.vertices()
+        else:
+            raise InvalidContainsException(item)

@@ -1,4 +1,4 @@
-from pytest import fixture
+from pytest import fixture, raises
 
 from pycs.graph.edge import Edge
 from pycs.graph.vertex import Vertex
@@ -79,12 +79,20 @@ def test_remove_vertex(graph):
     assert e_BA not in graph.edges()
 
 
-def test_insert_edge(graph):
+def test_insert_valid_edge(graph):
     e0 = Edge(Vertex("A"), Vertex("B"))
     e1 = Edge(Vertex("A"), Vertex("G"))
-    e2 = Edge(Vertex("X"), Vertex("Y"))
-    e2 = Edge(Vertex("A"), Vertex("Y"))
-    graph.insert_edge(Vertex("A"), Vertex("B"), )
+    graph.insert_edge(Vertex("A"), Vertex("B"))
+    graph.insert_edge(Vertex("A"), Vertex("G"))
+    assert e0 in graph
+    assert e1 in graph
+
+
+def test_insert_invalid_edge(graph):
+    with raises(ValueError):
+        graph.insert_edge(Vertex("X"), Vertex("Y"))
+    with raises(ValueError):
+        graph.insert_edge(Vertex("A"), Vertex("Z"))
 
 
 def test_remove_edge(graph):

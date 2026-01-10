@@ -31,3 +31,9 @@ class Edge:
 
     def opposite(self, v: Vertex) -> Vertex:
         return self._origin if v == self._destination else self._destination
+
+    def __eq__(self, other: Edge) -> bool:
+        return (
+                self._origin == other.origin and
+                self._destination == other.destination
+        )

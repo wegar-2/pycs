@@ -1,3 +1,4 @@
+from __future__ import annotations
 from typing import Any, Optional
 
 from pycs.graph.vertex import Vertex
@@ -30,3 +31,6 @@ class Edge:
 
     def opposite(self, v: Vertex) -> Vertex:
         return self._origin if v == self._destination else self._destination
+
+    def __eq__(self, other: Edge) -> bool:
+        return self._origin

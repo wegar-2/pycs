@@ -42,18 +42,26 @@ class AdjacencyListGraph(Graph):
                     return e
         return None
 
-    def degree(self, v: Vertex) -> int:
-        pass
+    def degree(self, v: Vertex) -> int | None:
+        if v in self._incidence_colls_map:
+            return len([
+                e for e in self._incidence_colls_map[v] if v in e.endpoints
+            ])
+        return None
 
-    def in_degree(self, v: Vertex) -> int:
-        pass
+    def in_degree(self, v: Vertex) -> int | None:
+        if v in self._incidence_colls_map:
+            return len([
+                e for e in self._incidence_colls_map[v] if e.destination == v
+            ])
+        return None
 
-    def out_degree(self, v: Vertex) -> int:
+    def out_degree(self, v: Vertex) -> int | None:
         if v in self._incidence_colls_map:
             return len([
                 e for e in self._incidence_colls_map[v] if e.origin == v
             ])
-        return 0
+        return None
 
     def incident_edges(self, v: Vertex) -> list[Edge] | None:
         if v in self._incidence_colls_map:
@@ -65,10 +73,32 @@ class AdjacencyListGraph(Graph):
             self._incidence_colls_map[v] = []
 
     def remove_vertex(self, v: Vertex) -> None:
-        pass
+        if v in self._incidence_colls_map:
+            self._incidence_colls_map.pop(v)
+        for v in self._incidence_colls_map:
+            self._incidence_colls_map[v] = [
+                e
+                for e in self._incidence_colls_map[v]
+                if v not in e.endpoints
+            ]
 
     def insert_edge(self, o: Vertex, d: Vertex, x: Any) -> None:
-        pass
+        e: Edge = Edge(o, d, x)
+        if e not in self._incidence_colls_map[o]:
+            self._incidence_colls_map[o].append(e)
+        if e not in self._incidence_colls_map[d]:
+            self._incidence_colls_map[d].append(e)
 
     def remove_edge(self, e: Edge) -> None:
-        pass
+        if (o:= e.origin) in self._incidence_colls_map:
+            self._incidence_colls_map[o] = [
+                oe
+                for oe in self._incidence_colls_map[o]
+                if e.endpoints != oe.endpoints
+            ]
+        if (d := e.destination) in self._incidence_colls_map:
+            self._incidence_colls_map[d] = [
+                de
+                for de in self._incidence_colls_map[d]
+                if e.endpoints != de.endpoints
+            ]

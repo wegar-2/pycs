@@ -1,4 +1,4 @@
-from typing import Any, TypeAlias
+from typing import Any, Optional, TypeAlias
 
 from pycs.graph.edge import Edge
 from pycs.graph.graph import Graph

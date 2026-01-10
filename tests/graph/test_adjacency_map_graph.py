@@ -33,25 +33,41 @@ def test_edges(graph):
     assert set(graph.edges()) == set(make_edges())
 
 
-def test_get_edge():
+def test_get_edge(graph):
+    assert (graph.get_edge(Vertex("A"), Vertex("B")) ==
+            Edge(Vertex("A"), Vertex("B")))
+    assert graph.get_edge(Vertex("A"), Vertex("K")) is None
+
+
+def test_degree(graph):
+    assert graph.degree(Vertex("A")) == 4
+    assert graph.degree(Vertex("B")) == 2
+    assert graph.degree(Vertex("C")) == 1
+    assert graph.degree(Vertex("G")) == 0
+
+
+def test_in_degree(graph):
+    assert graph.in_degree(Vertex("A")) == 2
+    assert graph.in_degree(Vertex("B")) == 1
+    assert graph.in_degree(Vertex("C")) == 0
+    assert graph.in_degree(Vertex("G")) == 0
+
+
+def test_out_degree(graph):
+    assert graph.out_degree(Vertex("A")) == 2
+    assert graph.out_degree(Vertex("B")) == 1
+    assert graph.out_degree(Vertex("C")) == 1
+    assert graph.out_degree(Vertex("G")) == 0
+
+
+def test_incident_edges(graph):
+    # assert (
+    #     set(graph.incident_edges(v=Vertex("A"))) == set([
+    #         Edge(Vertex("A"), Vertex("B")),
+    #         Edge(Vertex("B"), Vertex("A"))
+    #     ])
+    # )
     pass
-
-
-def test_degree():
-    pass
-
-
-def test_in_degree():
-    pass
-
-
-def test_out_degree():
-    pass
-
-
-def test_incident_edges():
-    pass
-
 
 def test_remove_vertex(graph):
     A, B = Vertex("A"), Vertex("B")
@@ -63,13 +79,22 @@ def test_remove_vertex(graph):
     assert e_BA not in graph.edges()
 
 
-def test_insert_edge():
-    pass
+def test_insert_edge(graph):
+    e0 = Edge(Vertex("A"), Vertex("B"))
+    e1 = Edge(Vertex("A"), Vertex("G"))
+    e2 = Edge(Vertex("X"), Vertex("Y"))
+    e2 = Edge(Vertex("A"), Vertex("Y"))
+    graph.insert_edge(Vertex("A"), Vertex("B"), )
 
 
-def test_remove_edge():
-    pass
+def test_remove_edge(graph):
+    e: Edge = Edge(Vertex("A"), Vertex("B"))
+    graph.remove_edge(e)
+    assert e not in graph.edges()
 
 
-def test_contains():
-    pass
+def test_contains(graph):
+    assert Vertex("A") in graph
+    assert Vertex("X") not in graph
+    assert Edge(Vertex("A"), Vertex("B")) in graph
+    assert Edge(Vertex("A"), Vertex("G")) not in graph

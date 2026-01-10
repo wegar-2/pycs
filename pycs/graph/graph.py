@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any, Union
+from typing import Any, Optional, Union
 
 from pycs.graph.edge import Edge
 from pycs.graph.vertex import Vertex
@@ -53,7 +53,12 @@ class Graph(ABC):
         pass
 
     @abstractmethod
-    def insert_edge(self, o: Vertex, d: Vertex, x: Any) -> None:
+    def insert_edge(
+            self,
+            o: Vertex,
+            d: Vertex,
+            x: Optional[Any] = None
+    ) -> None:
         pass
 
     @abstractmethod

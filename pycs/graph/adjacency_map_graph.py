@@ -1,4 +1,4 @@
-from typing import Any, TypeAlias
+from typing import Optional, TypeAlias
 
 from pycs.graph.edge import Edge
 from pycs.graph.graph import Graph
@@ -22,7 +22,12 @@ class AdjacencyMapGraph(Graph):
         if v not in self._incoming:
             self._incoming[v] = {}
 
-    def insert_edge(self, o: Vertex, d: Vertex, x: Any) -> None:
+    def insert_edge(
+            self,
+            o: Vertex,
+            d: Vertex,
+            x: Optional[int] = None
+    ) -> None:
         e: Edge = Edge(o, d, x)
         self._outgoing[o][d] = e
         self._incoming[d][o] = e

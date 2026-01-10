@@ -1,4 +1,4 @@
-from typing import Any, Union
+from typing import Optional, Union
 
 from pycs.graph.edge import Edge
 from pycs.graph.graph import Graph
@@ -40,7 +40,12 @@ class AdjacencyMatrixGraph(Graph):
     def remove_vertex(self, v: Vertex) -> None:
         pass
 
-    def insert_edge(self, o: Vertex, d: Vertex, x: Any) -> None:
+    def insert_edge(
+            self,
+            o: Vertex,
+            d: Vertex,
+            x: Optional[int] = None
+    ) -> None:
         pass
 
     def remove_edge(self, e: Edge) -> None:

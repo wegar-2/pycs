@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Optional
 
 from pycs.graph.edge import Edge
 from pycs.graph.graph import Graph
@@ -73,7 +73,12 @@ class EdgeListGraph(Graph):
         self._vertices.remove(v)
         self._edges = {e for e in self._edges if v not in e.endpoints}
 
-    def insert_edge(self, o: Vertex, d: Vertex, x: Any) -> None:
+    def insert_edge(
+            self,
+            o: Vertex,
+            d: Vertex,
+            x: Optional[int] = None
+    ) -> None:
         self._vertices.add(o)
         self._vertices.add(d)
         self._edges.add(Edge(o, d, x))

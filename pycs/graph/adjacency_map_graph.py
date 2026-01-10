@@ -69,6 +69,20 @@ class AdjacencyMapGraph(Graph):
         if v in self._incoming:
             self._incoming.pop(v)
 
+        for u in self._outgoing:
+            self._outgoing[u] = {
+                d: e
+                for d, e in self._outgoing[u].items()
+                if v not in e.endpoints
+            }
+        for u in self._incoming:
+            self._incoming[u] = {
+                d: e
+                for d, e in self._outgoing[u].items()
+                if v not in e.endpoints
+            }
+
+
     def in_degree(self, v: Vertex) -> int | None:
         if v in self._incoming:
             return len(self._incoming[v])

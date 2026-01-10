@@ -59,7 +59,7 @@ def test_remove_vertex(graph):
     e_BA: Edge = Edge(B, A)
     graph.remove_vertex(v=B)
     assert B not in graph.vertices()
-    assert e_AB not in graph.edges()
+    assert not (e_AB in graph.edges())
     assert e_BA not in graph.edges()
 
 

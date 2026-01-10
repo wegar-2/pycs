@@ -3,7 +3,7 @@ from pytest import fixture
 from pycs.graph.edge import Edge
 from pycs.graph.vertex import Vertex
 from pycs.graph.adjacency_map_graph import AdjacencyMapGraph
-from tests.graph.common import populate_empty_graph
+from tests.graph.common import populate_empty_graph, make_edges, make_vertices
 
 
 @fixture
@@ -17,20 +17,20 @@ def test_insert_vertex(graph):
     assert v in graph.vertices()
 
 
-def test_vertex_count():
-    pass
+def test_vertex_count(graph):
+    assert graph.vertex_count() == 7
 
 
-def test_edge_count():
-    pass
+def test_edge_count(graph):
+    assert graph.edge_count() == 5
 
 
-def test_vertices():
-    pass
+def test_vertices(graph):
+    assert set(graph.vertices()) == set(make_vertices())
 
 
-def test_edges():
-    pass
+def test_edges(graph):
+    assert set(graph.edges()) == set(make_edges())
 
 
 def test_get_edge():

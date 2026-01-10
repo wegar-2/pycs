@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Any, Optional
+from typing import Optional
 
 from pycs.graph.vertex import Vertex
 
@@ -8,10 +8,10 @@ class Edge:
 
     __slots__ = "_origin", "_destination", "_element"
 
-    def __init__(self, o: Vertex, d: Vertex, element: Optional[Any] = None):
+    def __init__(self, o: Vertex, d: Vertex, element: Optional[int] = None):
         self._origin: Vertex = o
         self._destination: Vertex = d
-        self._element: Any = element
+        self._element: Optional[int] = element
 
     @property
     def endpoints(self) -> tuple[Vertex, Vertex]:
@@ -26,7 +26,7 @@ class Edge:
         return self._destination
 
     @property
-    def element(self) -> Any:
+    def element(self) -> int:
         return self._element
 
     def opposite(self, v: Vertex) -> Vertex:
@@ -37,3 +37,6 @@ class Edge:
                 self._origin == other.origin and
                 self._destination == other.destination
         )
+
+    def __hash__(self):
+        return hash((self._origin, self._destination, self._element))

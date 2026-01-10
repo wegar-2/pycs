@@ -46,3 +46,7 @@ def test_element(edge):
 
 def test_eq(edge):
     assert edge == Edge(Vertex("A"), Vertex("B"), 123)
+
+
+def test_hash(edge):
+    assert hash(edge) == hash(Edge(Vertex("A"), Vertex("B"), 123))

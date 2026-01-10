@@ -15,8 +15,7 @@ def populate_empty_graph(graph: Graph) -> Graph:
     edges: list[Edge] = [
         Edge(A, B),
         Edge(A, C),
-        Edge(A, D),
-        Edge
+        Edge(A, D)
     ]
     for e in edges:
         graph.insert_edge(o=e.origin, d=e.destination, x=e.element)

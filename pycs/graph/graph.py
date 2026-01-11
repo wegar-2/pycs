@@ -44,6 +44,18 @@ class Graph(ABC):
     def incident_edges(self, v: Vertex) -> list[Edge] | None:
         pass
 
+    def outgoing_incident_edges(self, v: Vertex) -> list[Edge] | None:
+        ies = self.incident_edges(v)
+        if ies is not None:
+            return [e for e in ies if e.origin == v]
+        return None
+
+    def incoming_incident_edges(self, v: Vertex) -> list[Edge] | None:
+        ies = self.incident_edges(v)
+        if ies is not None:
+            return [e for e in ies if e.destination == v]
+        return None
+
     @abstractmethod
     def insert_vertex(self, v: Vertex) -> None:
         pass

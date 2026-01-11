@@ -1,4 +1,4 @@
-from typing import Any, Optional, TypeAlias
+from typing import Optional, TypeAlias
 
 from pycs.graph.edge import Edge
 from pycs.graph.graph import Graph
@@ -17,7 +17,7 @@ class AdjacencyListGraph(Graph):
         return len(self._incidence_colls_map)
 
     def edge_count(self) -> int:
-        return sum([len(ic) for _, ic in self._incidence_colls_map.items()])
+        return sum([len(ic) for _, ic in self._incidence_colls_map.items()]) // 2
 
     def vertices(self) -> list[Vertex]:
         return list([v for v in self._incidence_colls_map])
@@ -82,7 +82,7 @@ class AdjacencyListGraph(Graph):
                 if v not in e.endpoints
             ]
 
-    def insert_edge(self, o: Vertex, d: Vertex, x: Any) -> None:
+    def insert_edge(self, o: Vertex, d: Vertex, x: Optional[int] = None) -> None:
         e: Edge = Edge(o, d, x)
         if e not in self._incidence_colls_map[o]:
             self._incidence_colls_map[o].append(e)

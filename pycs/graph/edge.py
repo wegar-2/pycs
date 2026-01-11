@@ -40,3 +40,7 @@ class Edge:
 
     def __hash__(self):
         return hash((self._origin, self._destination, self._element))
+
+    def __str__(self) -> str:
+        return (f"Edge(o={self._origin}, d={self._destination}, "
+                f"element={self._element}")

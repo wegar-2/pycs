@@ -18,3 +18,9 @@ class Vertex:
 
     def __eq__(self, other: Vertex) -> bool:
         return self._element == other.element
+
+    def __str__(self) -> str:
+        if isinstance(self._element, int):
+            return f"Vertex(element={self._element})"
+        else:
+            return f"Vertex(element='{self._element}')"

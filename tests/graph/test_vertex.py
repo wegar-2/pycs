@@ -23,3 +23,10 @@ def test_eq():
     v = Vertex("A")
     u = Vertex("A")
     assert v == u
+
+
+def test_str():
+    v = Vertex("asdf")
+    assert str(v) == "Vertex(element='asdf')"
+    u = Vertex(123)
+    assert str(u) == "Vertex(element=123)"

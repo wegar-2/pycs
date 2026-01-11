@@ -29,10 +29,10 @@ class AdjacencyMapGraph(Graph):
             x: Optional[int] = None
     ) -> None:
         if o not in self._outgoing:
-            raise ValueError(f"Trying to insert edge from vertex {o}"
+            raise ValueError(f"Trying to insert edge from vertex {o=}"
                              f"that is not present in the graph")
         if d not in self._incoming:
-            raise ValueError(f"Trying to insert edge to vertex {d}"
+            raise ValueError(f"Trying to insert edge to vertex {d=}"
                              f"that is not present in the graph")
         e: Edge = Edge(o, d, x)
         self._outgoing[o][d] = e

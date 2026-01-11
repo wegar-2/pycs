@@ -73,7 +73,18 @@ class AdjacencyListGraph(Graph):
                 if v not in e.endpoints
             ]
 
-    def insert_edge(self, o: Vertex, d: Vertex, x: Optional[int] = None) -> None:
+    def insert_edge(
+            self,
+            o: Vertex,
+            d: Vertex,
+            x: Optional[int] = None
+    ) -> None:
+        if o not in self._incidence_colls_map:
+            raise ValueError(f"Trying to insert edge from vertex {o=}"
+                             f"that is not present in the graph")
+        if d not in self._incidence_colls_map:
+            raise ValueError(f"Trying to insert edge to vertex {d=}"
+                             f"that is not present in the graph")
         e: Edge = Edge(o, d, x)
         if e not in self._incidence_colls_map[o]:
             self._incidence_colls_map[o].append(e)

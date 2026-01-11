@@ -1,9 +1,13 @@
+from typing import Optional
+
 from pycs.graph.graph import Graph
 from pycs.graph.vertex import Vertex
-from pycs.graph.edge import Edge
 
 
-def dfs(graph: Graph, sv: Vertex):
+def dfs(graph: Graph, sv: Vertex, visited: Optional[list[Vertex]] = None):
+
+    if visited is None:
+        visited: list[Vertex] = [sv]
 
     if sv not in graph.vertices():
         raise ValueError(
@@ -11,10 +15,20 @@ def dfs(graph: Graph, sv: Vertex):
             f"of the graph! "
         )
 
-    next_vertices: list[Vertex] = [sv]
-    vertices_levels: dict[Vertex, int] = {sv: 0}
+    parent_vertex_map: dict[Vertex, Vertex | None] = {sv: None}
+    next_vertices: list[Vertex] = [
+        e.destination for e in graph.outgoing_incident_edges(sv)
+    ]
 
-    while next_vertices:
-        pass
+    for nv in next_vertices:
+        if nv not in visited:
+            visited.append(nv)
+            parent_vertex_map[nv] = sv
+            res = dfs(graph, sv=nv, visited=visited)
+            parent_vertex_map = res["parent_vertex_map"]
+            visited = res["visited"]
 
-    return None
+    return {
+        "parent_vertex_map": parent_vertex_map,
+        "visited": visited
+    }

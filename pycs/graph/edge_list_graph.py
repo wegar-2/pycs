@@ -79,8 +79,12 @@ class EdgeListGraph(Graph):
             d: Vertex,
             x: Optional[int] = None
     ) -> None:
-        self._vertices.add(o)
-        self._vertices.add(d)
+        if o not in self._vertices:
+            raise ValueError(f"Trying to insert edge from vertex {o=}"
+                             f"that is not present in the graph")
+        if d not in self._vertices:
+            raise ValueError(f"Trying to insert edge to vertex {d=}"
+                             f"that is not present in the graph")
         self._edges.add(Edge(o, d, x))
 
     def remove_edge(self, e: Edge) -> None:

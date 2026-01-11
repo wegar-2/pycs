@@ -28,18 +28,9 @@ class AdjacencyListGraph(Graph):
         })
 
     def get_edge(self, o: Vertex, d: Vertex) -> Edge | None:
-
-        orig: bool = False
-        if o in self._incidence_colls_map:
-            orig = any([])
-
-        dest: bool = False
-
-
-        if orig and dest:
-            for e in self._incidence_colls_map[o]:
-                if e.origin == o and e.destination == d:
-                    return e
+        for e in self._incidence_colls_map[o]:
+            if e.origin == o and e.destination == d:
+                return e
         return None
 
     def degree(self, v: Vertex) -> int | None:

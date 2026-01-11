@@ -61,13 +61,14 @@ def test_out_degree(graph):
 
 
 def test_incident_edges(graph):
-    # assert (
-    #     set(graph.incident_edges(v=Vertex("A"))) == set([
-    #         Edge(Vertex("A"), Vertex("B")),
-    #         Edge(Vertex("B"), Vertex("A"))
-    #     ])
-    # )
-    pass
+    expected_edges: set[Edge] = {
+        Edge(Vertex("A"), Vertex("B")),
+        Edge(Vertex("B"), Vertex("A")),
+        Edge(Vertex("A"), Vertex("D")),
+        Edge(Vertex("C"), Vertex("A")),
+    }
+    assert set(graph.incident_edges(v=Vertex("A"))) == expected_edges
+
 
 def test_remove_vertex(graph):
     A, B = Vertex("A"), Vertex("B")

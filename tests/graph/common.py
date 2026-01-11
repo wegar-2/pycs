@@ -41,4 +41,8 @@ def populate_empty_graph(graph: Graph) -> Graph:
 
 if __name__ == "__main__":
     from pycs.graph.adjacency_map_graph import AdjacencyMapGraph
-    amg = populate_empty_graph(graph=AdjacencyMapGraph())
+    from pycs.graph.adjacency_list_graph import AdjacencyListGraph
+    alg = populate_empty_graph(graph=AdjacencyListGraph())
+    e = alg.get_edge(Vertex("A"), Vertex("B"))
+    # e == Edge(Vertex("A"), Vertex("B"))
+    print("halt")

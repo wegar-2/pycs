@@ -53,6 +53,8 @@ def populate_graph_for_search(graph: Graph) -> Graph:
     graph.insert_edge(D, F)
     graph.insert_edge(E, G)
 
+
+
     return graph
 
 

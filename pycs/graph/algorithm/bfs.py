@@ -1,11 +1,12 @@
 from pycs.graph.graph import Graph
 from pycs.graph.vertex import Vertex
+from pycs.graph.algorithm.common import BFSResult
 
 
 def breadth_first_search(
         graph: Graph,
         sv: Vertex,
-) -> dict:
+) -> BFSResult:
     if sv not in graph.vertices():
         raise ValueError(
             f"Received invalid starting vertex {sv} which is not a member "

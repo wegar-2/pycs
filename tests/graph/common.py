@@ -53,14 +53,4 @@ def populate_graph_for_search(graph: Graph) -> Graph:
     graph.insert_edge(D, F)
     graph.insert_edge(E, G)
 
-
-
     return graph
-
-
-if __name__ == "__main__":
-    from pycs.graph.adjacency_map_graph import AdjacencyMapGraph
-    from pycs.graph.adjacency_list_graph import AdjacencyListGraph
-    alg = populate_empty_graph(graph=AdjacencyListGraph())
-    e = alg.get_edge(Vertex("A"), Vertex("B"))
-    print("halt")

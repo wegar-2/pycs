@@ -2,6 +2,7 @@ from typing import Optional
 
 from pycs.graph.graph import Graph
 from pycs.graph.vertex import Vertex
+from pycs.graph.algorithm.common import DFSResult
 
 
 def dfs(
@@ -9,7 +10,7 @@ def dfs(
         sv: Vertex,
         visited: Optional[list[Vertex]] = None,
         parent_vertex_map: Optional[dict[Vertex, Vertex]] = None
-):
+) -> DFSResult:
     if visited is None:
         visited: list[Vertex] = [sv]
     if parent_vertex_map is None:
@@ -42,14 +43,3 @@ def dfs(
         "parent_vertex_map": parent_vertex_map,
         "visited": visited
     }
-
-
-if __name__ == "__main__":
-    from pycs.graph.adjacency_map_graph import AdjacencyMapGraph
-    from tests.graph.common import populate_graph_for_search
-
-    graph = populate_graph_for_search(graph=AdjacencyMapGraph())
-
-    res = dfs(graph=graph, sv=Vertex("A"))
-
-    print("Halt! ")

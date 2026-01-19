@@ -4,6 +4,8 @@ from pycs.graph.graph import Graph
 from pycs.graph.vertex import Vertex
 from pycs.graph.algorithm.common import DFSResult
 
+__all__ = ["dfs"]
+
 
 def dfs(
         graph: Graph,

@@ -28,9 +28,3 @@ def encode_file_as(
 
 def binary_encode_file() -> None:
     pass
-
-
-if __name__ == "__main__":
-    res = str_to_bitarray(s="a", encoding="ascii")
-
-    print("halt! ")

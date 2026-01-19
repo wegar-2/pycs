@@ -1,0 +1,20 @@
+[project]
+name = "pycs"
+version = "0.0.1"
+description = """
+Computer science in Python
+"""
+readme = "README.md"
+requires-python = ">=3.12"
+keywords = ["data-structures", "ds", "algorithms"]
+authors = [
+  {name = "Artur Wegrzyn", email = "awegrzyn17@gmail.com" }
+]
+maintainers = [
+  {name = "Artur Wegrzyn", email = "awegrzyn17@gmail.com" }
+]
+dependencies = ["bitarray"]
+
+[build-system]
+requires = ["setuptools>=60.0.0", "wheel"]
+build-backend = "setuptools.build_meta"

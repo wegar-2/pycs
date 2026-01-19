@@ -3,6 +3,11 @@ from typing import Callable, Final
 
 from pycs.common.types import NumeralSystem, Number
 
+__all__ = [
+    "do_repeated_runs",
+    "make_input_sizes"
+]
+
 
 def make_input_sizes(
         exponents: list[Number] | None = None,

@@ -1,1 +1,1 @@
-from .src import str_to_bitarray
+from .src import encode_str_to_bitarray

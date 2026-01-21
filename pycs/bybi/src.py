@@ -1,21 +1,26 @@
 from pathlib import Path
 
-from pycs.common import Encoding, ENCODING_TO_MAX_BITS_PER_CHARACTER
+from pycs.common import Encoding
+from pycs.common.constants import ENCODING_TO_MAX_BITS_PER_CHARACTER
 
 from bitarray import bitarray
 
 __all__ = [
     "bitarray_to_binary_str",
-    "encode_str_to_bitarray"
+    "encode_str_to_bitarray",
+    "symbol_to_bitarray"
 ]
 
 
 def symbol_to_bitarray(l: str, encoding: Encoding) -> bitarray:
+    if len(l) != 1:
+        raise ValueError(
+            f"Passed string of length != 1 to symbol_to_bitarray: {l=}")
     encoding_size: int = ENCODING_TO_MAX_BITS_PER_CHARACTER[encoding]
     l_bytes: bytes = l.encode(encoding)
-    ba: bitarray = bitarray([0] * len(l_bytes) * 8)
+    ba: bitarray = bitarray([0] * encoding_size)
     for i, byte_ in enumerate(l_bytes):
-        ba[8*i:8*(i+1)] = bitarray(f"{byte_:08b}")
+        ba[8*i:8*(i+1)] = bitarray(bin(byte_)[2:])
     return bitarray([0] * (encoding_size - 8 * len(l_bytes)) + list(ba))
 
 
@@ -46,7 +51,4 @@ def file_to_binary_str(
 
 
 if __name__ == "__main__":
-
-    encode_str_to_bitarray(s="asdf qwerty śćęrt", encoding="utf8")
-
     print("halt!")

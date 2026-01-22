@@ -6,10 +6,10 @@ class FixedLenIntArray:
     Note: since __getitem__ is implemented this class is iterable
     """
 
-    def __init__(self, l: int):
-        self._validate_is_positive_int(i=l)
-        self._l: Final[int] = l
-        self._data: list[int] = [0] * l
+    def __init__(self, len_: int):
+        self._validate_is_positive_int(i=len_)
+        self._l: Final[int] = len_
+        self._data: list[int] = [0] * len_
 
     @property
     def data(self):

@@ -17,7 +17,9 @@ class AdjacencyListGraph(Graph):
         return len(self._incidence_colls_map)
 
     def edge_count(self) -> int:
-        return sum([len(ic) for _, ic in self._incidence_colls_map.items()]) // 2
+        return sum([
+            len(ic) for _, ic in self._incidence_colls_map.items()
+        ]) // 2
 
     def vertices(self) -> list[Vertex]:
         return list([v for v in self._incidence_colls_map])
@@ -92,7 +94,7 @@ class AdjacencyListGraph(Graph):
             self._incidence_colls_map[d].append(e)
 
     def remove_edge(self, e: Edge) -> None:
-        if (o:= e.origin) in self._incidence_colls_map:
+        if (o := e.origin) in self._incidence_colls_map:
             self._incidence_colls_map[o] = [
                 oe
                 for oe in self._incidence_colls_map[o]

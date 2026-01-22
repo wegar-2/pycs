@@ -93,7 +93,6 @@ class AdjacencyMapGraph(Graph):
                 if v not in e.endpoints
             }
 
-
     def in_degree(self, v: Vertex) -> int | None:
         if v in self._incoming:
             return len(self._incoming[v])

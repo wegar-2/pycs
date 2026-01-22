@@ -19,4 +19,3 @@ if __name__ == "__main__":
         lines: list[str] = f.readlines()
         for line in lines:
             print(line)
-            

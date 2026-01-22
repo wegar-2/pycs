@@ -7,14 +7,14 @@ from pycs.data_structures.array.fixed_len_int_array import FixedLenIntArray
 
 @fixture
 def fli_data_array() -> FixedLenIntArray:
-    ar: FixedLenIntArray = FixedLenIntArray(l=100)
+    ar: FixedLenIntArray = FixedLenIntArray(len_=100)
     for i in range(len(ar)):
         ar[i] = random.randint(a=0, b=1_000)
     return ar
 
 
 def test_fixed_len_int_array_creation():
-    ar: FixedLenIntArray = FixedLenIntArray(l=100)
+    ar: FixedLenIntArray = FixedLenIntArray(len_=100)
     assert isinstance(ar, FixedLenIntArray)
     assert len(ar) == 100
 

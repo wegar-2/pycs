@@ -34,7 +34,8 @@ class AVLTree:
             elif key > node.key:
                 node.right = self._insert_into_node(node=node.right, key=key)
             else:
-                logger.info(f"Value of key: {key} already present in the node...")
+                logger.info(
+                    f"Value of key: {key} already present in the node...")
 
             node.height = max(
                 self._node_height(node=node.left),
@@ -55,7 +56,6 @@ class AVLTree:
                 return self._left_rotate(node=node)
 
             return node
-
 
     def _left_rotate(self, node: Node) -> Node:
 

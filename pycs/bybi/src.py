@@ -1,23 +1,23 @@
 from pathlib import Path
 
-from pycs.common import Encoding
-from pycs.common.constants import ENCODING_TO_MAX_BITS_PER_CHARACTER
+from pycs.common.types import Encoding
+from pycs.common.constants import ENCODING_TO_BITS_PER_CHARACTER
 
 from bitarray import bitarray
 
 __all__ = [
     "bitarray_to_binary_str",
     "encode_str_to_bitarray",
-    "symbol_to_bitarray"
+    "encode_symbol_to_bitarray"
 ]
 
 
-def symbol_to_bitarray(l: str, encoding: Encoding) -> bitarray:
-    if len(l) != 1:
+def encode_symbol_to_bitarray(symbol: str, encoding: Encoding) -> bitarray:
+    if len(symbol) != 1:
         raise ValueError(
-            f"Passed string of length != 1 to symbol_to_bitarray: {l=}")
-    encoding_size: int = ENCODING_TO_MAX_BITS_PER_CHARACTER[encoding]
-    l_bytes: bytes = l.encode(encoding)
+            f"Passed string of length != 1 to symbol_to_bitarray: {symbol=}")
+    encoding_size: int = ENCODING_TO_BITS_PER_CHARACTER[encoding]
+    l_bytes: bytes = symbol.encode(encoding)
     ba: bitarray = bitarray([0] * encoding_size)
     for i, byte_ in enumerate(l_bytes):
         ba[8*i:8*(i+1)] = bitarray(bin(byte_)[2:])
@@ -25,11 +25,11 @@ def symbol_to_bitarray(l: str, encoding: Encoding) -> bitarray:
 
 
 def encode_str_to_bitarray(s: str, encoding: Encoding) -> bitarray:
-    bits_per_character: int = ENCODING_TO_MAX_BITS_PER_CHARACTER[encoding]
+    bits_per_character: int = ENCODING_TO_BITS_PER_CHARACTER[encoding]
     ba: bitarray = bitarray(bits_per_character*len(s))
     for i in range(len(s)):
         ba[bits_per_character*i:bits_per_character*(i+1)] = (
-            symbol_to_bitarray(l=s[i], encoding=encoding))
+            encode_symbol_to_bitarray(symbol=s[i], encoding=encoding))
     return ba
 
 

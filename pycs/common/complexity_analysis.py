@@ -34,6 +34,7 @@ def do_repeated_runs(
         runs_num: int,
         input_size: int
 ):
-    run_times: list[float]
-    for _ in range(runs_num):
-        pass
+    # run_times: list[float] = []
+    # for _ in range(runs_num):
+    #     pass
+    pass

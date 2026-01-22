@@ -1,7 +1,5 @@
-
 # pycs
 
----
 
 Investigating select aspects of CS and / or Python.
 

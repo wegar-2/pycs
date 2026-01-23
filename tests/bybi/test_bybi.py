@@ -1,9 +1,11 @@
+from bitarray import bitarray
+from pycs.common.constants import GERMAN_LETTERS, POLISH_LETTERS
+
 from pycs.bybi.src import (
     bitarray_to_binary_str,
     encode_symbol_to_bitarray,
     decode_bitarray_symbol_repr
 )
-from bitarray import bitarray
 
 
 def test_bitarray_to_binary_str():
@@ -30,8 +32,16 @@ def test_encode_decode_symbol_utf8():
 
 
 def test_encode_decode_polish_alphabet_utf8():
-    pass
+    for letter in POLISH_LETTERS:
+        letter_ba: bitarray = encode_symbol_to_bitarray(letter, "utf8")
+        letter_recov: str = decode_bitarray_symbol_repr(letter_ba, "utf8")
+        assert len(letter_recov) == 1
+        assert letter_recov == letter
 
 
 def test_encode_decode_german_alphabet_utf9():
-    pass
+    for letter in GERMAN_LETTERS:
+        letter_ba: bitarray = encode_symbol_to_bitarray(letter, "utf8")
+        letter_recov: str = decode_bitarray_symbol_repr(letter_ba, "utf8")
+        assert len(letter_recov) == 1
+        assert letter_recov == letter

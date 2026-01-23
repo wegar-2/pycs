@@ -1,9 +1,8 @@
 from pycs.bybi.src import (
-    encode_str_to_bitarray,
     bitarray_to_binary_str,
-    encode_symbol_to_bitarray
+    encode_symbol_to_bitarray,
+    decode_bitarray_symbol_repr
 )
-from string import ascii_letters
 from bitarray import bitarray
 
 
@@ -17,12 +16,22 @@ def test_symbol_to_bitarray_on_ascii_symbol():
     assert ord(symbol) == int("".join([str(x) for x in symbol_ba]), base=2)
 
 
-# def test_str_to_bitarray():
-#     a_bits = encode_str_to_bitarray(s="a", encoding="ascii")
-#     assert a_bits == bitarray("01100001")
-#
-#
-# def test_str_to_bitarray_on_ascii():
-#     for l in ascii_letters:
-#         assert encode_str_to_bitarray(l, "ascii") == bitarray(
-#             bin(ord(l))[2:].rjust(8, "0"))
+def test_encode_decode_symbol_ascii():
+    t_ba: bitarray = encode_symbol_to_bitarray(symbol="t", encoding="ascii")
+    t_recov: str = decode_bitarray_symbol_repr(ba=t_ba, encoding="ascii")
+    assert len(t_recov) == 1
+    assert "t" == t_recov
+
+
+def test_encode_decode_symbol_utf8():
+    polish_a_ba: bitarray = encode_symbol_to_bitarray(symbol="ą", encoding="utf8")
+    polish_a_recov: str = decode_bitarray_symbol_repr(ba=polish_a_ba, encoding="utf8")
+    assert "ą" == polish_a_recov
+
+
+def test_encode_decode_polish_alphabet_utf8():
+    pass
+
+
+def test_encode_decode_german_alphabet_utf9():
+    pass

@@ -7,6 +7,7 @@ from bitarray import bitarray
 
 __all__ = [
     "bitarray_to_binary_str",
+    "decode_bitarray_symbol_repr",
     "encode_str_to_bitarray",
     "encode_symbol_to_bitarray"
 ]
@@ -18,9 +19,9 @@ def encode_symbol_to_bitarray(symbol: str, encoding: Encoding) -> bitarray:
             f"Passed string of length != 1 to symbol_to_bitarray: {symbol=}")
     encoding_size: int = ENCODING_TO_BITS_PER_CHARACTER[encoding]
     l_bytes: bytes = symbol.encode(encoding)
-    ba: bitarray = bitarray([0] * encoding_size)
+    ba: bitarray = bitarray([0] * 8 * len(l_bytes))
     for i, byte_ in enumerate(l_bytes):
-        ba[8*i:8*(i+1)] = bitarray(bin(byte_)[2:])
+        ba[8*i:8*(i+1)] = bitarray(f"{byte_:08b}")
     return bitarray([0] * (encoding_size - 8 * len(l_bytes)) + list(ba))
 
 
@@ -33,8 +34,18 @@ def encode_str_to_bitarray(s: str, encoding: Encoding) -> bitarray:
     return ba
 
 
-def decode_bitarray_to_str(ba: bitarray, encoding: Encoding) -> str:
-    pass
+def decode_bitarray_symbol_repr(ba: bitarray, encoding: Encoding) -> str:
+    bit_len_ = len(ba)
+    if bit_len_ != (exp_bit_len := ENCODING_TO_BITS_PER_CHARACTER[encoding]):
+        raise ValueError(
+            f"Invalid length of the bitarrray: {bit_len_}; "
+            f"expected bit length: {exp_bit_len}"
+        )
+    bytes_ = bytes([
+        int("".join([str(x) for x in ba[8 * i:8 * (i + 1)]]), base=2)
+        for i in range(bit_len_ // 8)
+    ])
+    return bytes_.lstrip(b"\00").decode(encoding)
 
 
 def bitarray_to_binary_str(ba: bitarray) -> str:
@@ -51,4 +62,8 @@ def file_to_binary_str(
 
 
 if __name__ == "__main__":
+
+    s_ba = encode_symbol_to_bitarray(symbol="ą", encoding="utf8")
+    s_recov = decode_bitarray_symbol_repr(s_ba, encoding="utf8")
+
     print("halt!")

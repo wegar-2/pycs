@@ -2,9 +2,9 @@
 
 ![Flake8 Lint Check](https://github.com/wegar-2/pycs/actions/workflows/flake8-lint.yml/badge.svg)
 ![CI](https://github.com/wegar-2/pycs/actions/workflows/python-tests.yml/badge.svg)
-![codecov](https://codecov.io/gh/wegar-2/pycs/branch/main/graph/badge.svg)
+[![codecov](https://codecov.io/github/wegar-2/pycs/graph/badge.svg?token=XJY6OWPSPI)](https://codecov.io/github/wegar-2/pycs)
 
-Investigating select aspects of CS and / or Python.
+Investigating select aspects of CS in Python.
 
 
 Contents - subpackages of `pycs`:

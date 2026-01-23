@@ -1,5 +1,8 @@
 # pycs
 
+![Flake8 Lint Check](https://github.com/wegar-2/pycs/actions/workflows/flake8-lint.yml/badge.svg)
+![CI](https://github.com/wegar-2/pycs/actions/workflows/python-tests.yml/badge.svg)
+![codecov](https://codecov.io/gh/wegar-2/pycs/branch/main/graph/badge.svg)
 
 Investigating select aspects of CS and / or Python.
 

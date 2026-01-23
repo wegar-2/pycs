@@ -1,15 +1,13 @@
 from bitarray import bitarray
-from pycs.common.constants import GERMAN_LETTERS, POLISH_LETTERS
+from string import ascii_letters
 
+from pycs.common.constants import GERMAN_LETTERS, POLISH_LETTERS
 from pycs.bybi.src import (
-    bitarray_to_binary_str,
+    decode_bitarray_str_repr,
     encode_symbol_to_bitarray,
+    encode_str_to_bitarray,
     decode_bitarray_symbol_repr
 )
-
-
-def test_bitarray_to_binary_str():
-    assert bitarray_to_binary_str(ba=bitarray([0, 1, 0, 0, 1, 0, 1])) == "0100101"
 
 
 def test_symbol_to_bitarray_on_ascii_symbol():
@@ -45,3 +43,21 @@ def test_encode_decode_german_alphabet_utf9():
         letter_recov: str = decode_bitarray_symbol_repr(letter_ba, "utf8")
         assert len(letter_recov) == 1
         assert letter_recov == letter
+
+
+def test_encode_decode_str_ascii():
+    ba: bitarray = encode_str_to_bitarray(s=ascii_letters, encoding="ascii")
+    ascii_letters_recov = decode_bitarray_str_repr(ba, encoding="ascii")
+    assert ascii_letters == ascii_letters_recov
+
+
+def test_encode_decode_polish_str_utf8():
+    ba: bitarray = encode_str_to_bitarray(s=POLISH_LETTERS, encoding="utf8")
+    polish_letters_recov = decode_bitarray_str_repr(ba, encoding="utf8")
+    assert POLISH_LETTERS == polish_letters_recov
+
+
+def test_encode_decode_german_str_utf8():
+    ba: bitarray = encode_str_to_bitarray(s=GERMAN_LETTERS, encoding="utf8")
+    polish_letters_recov = decode_bitarray_str_repr(ba, encoding="utf8")
+    assert GERMAN_LETTERS == polish_letters_recov

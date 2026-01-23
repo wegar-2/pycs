@@ -1,3 +1,5 @@
+from array import array
+
 from pathlib import Path
 
 from pycs.common.types import Encoding
@@ -6,7 +8,7 @@ from pycs.common.constants import ENCODING_TO_BITS_PER_CHARACTER
 from bitarray import bitarray
 
 __all__ = [
-    "bitarray_to_binary_str",
+    "decode_bitarray_str_repr",
     "decode_bitarray_symbol_repr",
     "encode_str_to_bitarray",
     "encode_symbol_to_bitarray"
@@ -25,15 +27,6 @@ def encode_symbol_to_bitarray(symbol: str, encoding: Encoding) -> bitarray:
     return bitarray([0] * (encoding_size - 8 * len(l_bytes)) + list(ba))
 
 
-def encode_str_to_bitarray(s: str, encoding: Encoding) -> bitarray:
-    bits_per_character: int = ENCODING_TO_BITS_PER_CHARACTER[encoding]
-    ba: bitarray = bitarray(bits_per_character*len(s))
-    for i in range(len(s)):
-        ba[bits_per_character*i:bits_per_character*(i+1)] = (
-            encode_symbol_to_bitarray(symbol=s[i], encoding=encoding))
-    return ba
-
-
 def decode_bitarray_symbol_repr(ba: bitarray, encoding: Encoding) -> str:
     bit_len_ = len(ba)
     if bit_len_ != (exp_bit_len := ENCODING_TO_BITS_PER_CHARACTER[encoding]):
@@ -48,8 +41,29 @@ def decode_bitarray_symbol_repr(ba: bitarray, encoding: Encoding) -> str:
     return bytes_.lstrip(b"\00").decode(encoding)
 
 
-def bitarray_to_binary_str(ba: bitarray) -> str:
-    return "".join([str(x) for x in ba])
+def encode_str_to_bitarray(s: str, encoding: Encoding) -> bitarray:
+    bits_per_character: int = ENCODING_TO_BITS_PER_CHARACTER[encoding]
+    ba: bitarray = bitarray(bits_per_character*len(s))
+    for i in range(len(s)):
+        ba[bits_per_character*i:bits_per_character*(i+1)] = (
+            encode_symbol_to_bitarray(symbol=s[i], encoding=encoding))
+    return ba
+
+
+def decode_bitarray_str_repr(ba: bitarray, encoding: Encoding) -> str:
+    bit_len: int = len(ba)
+    char_bit_len: int = ENCODING_TO_BITS_PER_CHARACTER[encoding]
+    if (symbols_count := int(bit_len / char_bit_len)) != (bit_len / char_bit_len):
+        raise ValueError("")
+    symbols: list[str] = []
+    for i in range(symbols_count):
+        symbols.append(
+            decode_bitarray_symbol_repr(
+                ba=ba[char_bit_len*i:char_bit_len*(i+1)],
+                encoding=encoding
+            )
+        )
+    return "".join(symbols)
 
 
 def file_to_binary_str(

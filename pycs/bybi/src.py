@@ -1,5 +1,3 @@
-from array import array
-
 from pathlib import Path
 
 from pycs.common.types import Encoding
@@ -53,8 +51,15 @@ def encode_str_to_bitarray(s: str, encoding: Encoding) -> bitarray:
 def decode_bitarray_str_repr(ba: bitarray, encoding: Encoding) -> str:
     bit_len: int = len(ba)
     char_bit_len: int = ENCODING_TO_BITS_PER_CHARACTER[encoding]
-    if (symbols_count := int(bit_len / char_bit_len)) != (bit_len / char_bit_len):
-        raise ValueError("")
+    if (
+            (symbols_count := int(bit_len / char_bit_len)) !=
+            (bit_len / char_bit_len)
+    ):
+        raise ValueError(
+            f"Length of bitarray: {bit_len} is inconsistent with the size "
+            f"of "
+        )
+    symbols_count = int(bit_len / char_bit_len)
     symbols: list[str] = []
     for i in range(symbols_count):
         symbols.append(

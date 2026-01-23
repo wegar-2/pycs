@@ -1,25 +1,21 @@
-name: Run Pytest
+name: Tests
 
 on:
   push:
-    branches: [ master ]
   pull_request:
-    branches: [ master ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.12]
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: "3.12"
 
       - name: Install dependencies
         run: |
@@ -29,10 +25,4 @@ jobs:
 
       - name: Run tests with coverage
         run: |
-          pytest --cov=pycs tests/
-          coverage xml
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}  # only needed for private repos
+          pytest --cov=pycs --cov-report=xml

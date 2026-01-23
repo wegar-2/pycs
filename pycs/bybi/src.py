@@ -1,9 +1,8 @@
-from pathlib import Path
+from bitarray import bitarray
 
 from pycs.common.types import Encoding
 from pycs.common.constants import ENCODING_TO_BITS_PER_CHARACTER
 
-from bitarray import bitarray
 
 __all__ = [
     "decode_bitarray_str_repr",
@@ -69,20 +68,3 @@ def decode_bitarray_str_repr(ba: bitarray, encoding: Encoding) -> str:
             )
         )
     return "".join(symbols)
-
-
-def file_to_binary_str(
-    source_file: Path,
-    target_file: Path,
-    source_enc: Encoding,
-    target_enc: Encoding
-):
-    pass
-
-
-if __name__ == "__main__":
-
-    s_ba = encode_symbol_to_bitarray(symbol="ą", encoding="utf8")
-    s_recov = decode_bitarray_symbol_repr(s_ba, encoding="utf8")
-
-    print("halt!")

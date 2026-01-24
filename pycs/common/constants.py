@@ -23,7 +23,7 @@ GERMAN_LETTERS: Final[str] = "äöüÄÖÜß"
 
 
 _REMAINDER_TO_SYMBOL_MAP_DECIMAL: dict[int, str] = {
-    i: str(i) for i in range(2, 11, 1)
+    i: str(i) for i in range(0, 11, 1)
 }
 
 

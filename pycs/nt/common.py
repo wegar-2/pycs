@@ -51,7 +51,7 @@ def to_base(n: int, r: Radix) -> str:
     base_power_counter: int = 1
     base_power_bound: int = get_nn_len_at_base(n, r)
     num: int = n
-    while base_power_counter < base_power_bound:
+    while base_power_counter <= base_power_bound:
         remainder: int = num % r
         str_rep.append(REMAINDER_TO_SYMBOL_MAP[remainder])
         num = num // r

@@ -33,5 +33,4 @@ def radix_sort(nums: list[int]) -> list[int]:
     base10_max_len: int = max([len(str(x)) for x in nums])
     str_nums: list[str] = [str(x).rjust(base10_max_len, "0") for x in nums]
 
-
     return nums

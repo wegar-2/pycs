@@ -5,7 +5,7 @@ from pycs.common.types import Radix
 
 __all__ = [
     "get_nn_len_at_base",
-    "get_ith_last_digit_of_number_repr",
+    "get_ith_last_remainder_of_number_repr",
     "to_base"
 ]
 
@@ -35,7 +35,7 @@ def get_nn_len_at_base(
     return res
 
 
-def get_ith_last_digit_of_number_repr(n: int, r: Radix, i: int) -> int:
+def get_ith_last_remainder_of_number_repr(n: int, r: Radix, i: int) -> int:
     if i > (base_repr_len := get_nn_len_at_base(n, r)):
         raise ValueError(
             f"Representation of {n=:_} at base {r=} is {base_repr_len},"

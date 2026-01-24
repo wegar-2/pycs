@@ -35,13 +35,13 @@ def get_nn_len_at_base(
     return res
 
 
-def get_ith_last_remainder_of_number_repr(n: int, r: Radix, i: int) -> int:
+def get_ith_last_remainder_of_number_repr(n: int, r: Radix, i: int) -> str:
     if i > (base_repr_len := get_nn_len_at_base(n, r)):
         raise ValueError(
             f"Representation of {n=:_} at base {r=} is {base_repr_len},"
             f"whereas {i}-th digit from the ends has been requested! "
         )
-    return n % r**i
+    return REMAINDER_TO_SYMBOL_MAP[(n // (r**(i-1))) % r]
 
 
 def to_base(n: int, r: Radix) -> str:

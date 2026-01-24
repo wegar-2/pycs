@@ -26,23 +26,56 @@ def test_get_nn_len_at_base17():
 
 
 def test_get_ith_last_remainder_of_number_repr_at_base2():
-    # nn_str: str = "101011"
-    # nn: int = int(nn_str, 2)
-    # for i in range(len(nn_str) - 1, -1, -1):
-    #     assert nn_str[i]
-    pass
+    nn_str: str = "101011"
+    nn_str_rev: str = nn_str[::-1]
+    nn: int = int(nn_str, 2)
+    for i in range(len(nn_str)):
+        assert (
+                nn_str_rev[i] ==
+                get_ith_last_remainder_of_number_repr(nn, 2, i+1)
+        )
 
 
 def test_get_ith_last_remainder_of_number_repr_at_base3():
-    pass
+    nn_str: str = "121202"
+    nn_str_rev: str = nn_str[::-1]
+    nn: int = int(nn_str, base=3)
+    for i in range(len(nn_str)):
+        assert (
+                nn_str_rev[i] ==
+                get_ith_last_remainder_of_number_repr(nn, 3, i + 1)
+        )
 
 
 def test_get_ith_last_remainder_of_number_repr_at_base10():
-    pass
+    nn_str: str = "653911"
+    nn_str_rev: str = nn_str[::-1]
+    nn: int = int(nn_str)
+    for i in range(len(nn_str)):
+        assert (
+                nn_str_rev[i] ==
+                get_ith_last_remainder_of_number_repr(nn, 10, i + 1)
+        )
 
 
 def test_get_ith_last_remainder_of_number_repr_at_base17():
-    pass
+    nn_str: str = "GFEDCB12"
+    nn_str_rev: str = nn_str[::-1]
+    nn: int = (
+        2 * 17**0 +
+        1 * 17**1 +
+        11 * 17**2 +
+        12 * 17**3 +
+        13 * 17**4 +
+        14 * 17**5 +
+        15 * 17**6 +
+        16 * 17**7
+    )
+    for i in range(len(nn_str)):
+        assert (
+                nn_str_rev[i] ==
+                get_ith_last_remainder_of_number_repr(nn, 17, i + 1)
+        )
 
 
 def test_to_base2():
@@ -65,4 +98,7 @@ def test_to_base10():
 
 
 def test_to_base17():
-    pass
+    assert to_base(n=10, r=17) == "A"
+    assert to_base(n=16, r=17) == "G"
+    assert to_base(n=17, r=17) == "10"
+    assert to_base(n=17**2, r=17) == "100"

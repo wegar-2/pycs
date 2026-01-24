@@ -50,17 +50,15 @@ def encode_str_to_bitarray(s: str, encoding: Encoding) -> bitarray:
 def decode_bitarray_str_repr(ba: bitarray, encoding: Encoding) -> str:
     bit_len: int = len(ba)
     char_bit_len: int = ENCODING_TO_BITS_PER_CHARACTER[encoding]
-    if (
-            (symbols_count := int(bit_len / char_bit_len)) !=
-            (bit_len / char_bit_len)
-    ):
+    quot_len, remain_len = bit_len // char_bit_len, bit_len % char_bit_len
+    if remain_len != 0:
         raise ValueError(
-            f"Length of bitarray: {bit_len} is inconsistent with the size "
-            f"of "
+            f"Length of bitarray: {bit_len=:_} is inconsistent with the size "
+            f"of the single char {char_bit_len=:_} - "
+            f"yields {remain_len=:_}"
         )
-    symbols_count = int(bit_len / char_bit_len)
     symbols: list[str] = []
-    for i in range(symbols_count):
+    for i in range(quot_len):
         symbols.append(
             decode_bitarray_symbol_repr(
                 ba=ba[char_bit_len*i:char_bit_len*(i+1)],

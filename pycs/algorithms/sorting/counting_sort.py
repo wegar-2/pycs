@@ -17,7 +17,7 @@ def _max(nums: list[int]) -> int:
     return m
 
 
-def counting_sort(nums: list[int], limit_multiplier: int = 100):
+def counting_sort(nums: list[int], limit_multiplier: int = 100) -> list[int]:
 
     _validate_input(nums)
     nums_ar: array = array("i", nums)
@@ -42,4 +42,4 @@ def counting_sort(nums: list[int], limit_multiplier: int = 100):
         sorted_arr[counts_arr[x]-1] = x
         counts_arr[x] -= 1
 
-    return sorted_arr
+    return list(sorted_arr)

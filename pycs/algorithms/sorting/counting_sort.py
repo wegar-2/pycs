@@ -23,8 +23,12 @@ def counting_sort(nums: list[int], limit_multiplier: int = 100):
     nums_ar: array = array("i", nums)
     m: int = _max(nums)
 
-    if m > limit_multiplier * len(nums):
-        pass
+    if m > (limit := limit_multiplier * (nums_len := len(nums))):
+        raise ValueError(
+            f"The max value in the array is {m:_} which is greater than "
+            f"the allowed {limit=:_} equal to product of "
+            f"{limit_multiplier=:_} and {nums_len}"
+        )
 
     counts_arr: array = array("i", [0] * (m + 1))
     sorted_arr: array = array("i", [0] * len(nums_ar))
@@ -39,17 +43,3 @@ def counting_sort(nums: list[int], limit_multiplier: int = 100):
         counts_arr[x] -= 1
 
     return sorted_arr
-
-
-if __name__ == "__main__":
-    import random
-
-
-    def _generate_nums(len_: int = 10_000, upper_bound: int = 1_000) -> list[
-        int]:
-        random.seed(123)
-        return [random.randint(a=1, b=upper_bound) for _ in range(len_)]
-
-
-    nums = _generate_nums()
-    assert sorted(nums) == list(counting_sort(nums))

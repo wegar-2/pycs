@@ -14,11 +14,14 @@ def test_counting_sort():
     assert sorted(nums) == list(counting_sort(nums))
 
 
-# def test_raises_error_on_negative_numbers():
-#     with raises():
-#         pass
-#
-#
-# def test_input_too_large_elements():
-#     with raises():
-#         pass
+def test_raises_error_on_negative_numbers():
+    nums = _generate_nums()
+    nums[50] = -123
+    with raises(ValueError):
+        counting_sort(nums)
+
+
+def test_input_too_large_elements():
+    nums = _generate_nums(len_=20, upper_bound=100_000)
+    with raises(ValueError):
+        counting_sort(nums)

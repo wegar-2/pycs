@@ -45,11 +45,11 @@ class Heap:
         curr_idx: int = last_idx
         value: int = self._data[curr_idx]
 
-        while curr_idx >= 0:
+        while curr_idx > 0:
             parent_idx = (curr_idx - 1) // 2
-            if self._data[parent_idx] > value:
+            if (parent_value := self._data[parent_idx]) > value:
                 self._data[parent_idx], self._data[curr_idx] = (
-                    self._data[curr_idx], self._data[parent_idx])
+                    value, parent_value)
                 curr_idx = parent_idx
             else:
                 break
@@ -59,8 +59,8 @@ class Heap:
         self._up_heap_bubble()
 
     def pop(self) -> int:
-        if len(self) == 0:
-            ValueError("Heap is empty! ")
+        if len(self._data) == 0:
+            raise ValueError("Heap is empty! ")
         last: int = self._data.pop()
 
         if len(self._data) == 0:

@@ -3,10 +3,6 @@ from array import array
 from pycs.algorithms.sorting.counting_sort import counting_sort
 
 
-def _get_digit_at_base(n: int, radix: int = 2):
-    pass
-
-
 def _counting_sort(nums: list[int], digit: int) -> array:
 
     ar: array = array("i", nums)

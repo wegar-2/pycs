@@ -1,3 +1,4 @@
+from typing import Optional
 
 
 class Heap:
@@ -12,32 +13,32 @@ class Heap:
     def __len__(self) -> int:
         return len(self._data)
 
-    def _down_heap_bubble(self, idx: int = 0) -> None:
-        curr_idx: int = idx
-        value: int = self._data[curr_idx]
+    def _down_heap_bubble(self) -> None:
+        curr_idx = 0
 
-        lc_idx = self._index_left_child(idx=curr_idx)
-        rc_idx = self._index_right_child(idx=curr_idx)
+        while True:
+            lc_idx = self._index_left_child(curr_idx)
+            rc_idx = self._index_right_child(curr_idx)
+            smallest = curr_idx
 
-        if lc_idx <= len(self) - 1:
-            lc_value = self._data[lc_idx]
-            if lc_value < value:
-                self._data[lc_idx], self._data[curr_idx] = (
-                    self._data[curr_idx], self._data[lc_idx])
-                self._down_heap_bubble(idx=lc_idx)
-            else:
-                return None
+            if (
+                    lc_idx < len(self._data) and
+                    self._data[lc_idx] < self._data[smallest]
+            ):
+                smallest = lc_idx
 
-        if rc_idx <= len(self) - 1:
-            rc_value = self._data[rc_idx]
-            if rc_value < value:
-                self._data[rc_idx], self._data[curr_idx] = (
-                    self._data[curr_idx], self._data[rc_idx])
-                self._down_heap_bubble(idx=rc_idx)
-            else:
-                return None
+            if (
+                    rc_idx < len(self._data) and
+                    self._data[rc_idx] < self._data[smallest]
+            ):
+                smallest = rc_idx
 
-        return None
+            if smallest == curr_idx:
+                break
+
+            self._data[curr_idx], self._data[smallest] = (
+                self._data[smallest], self._data[curr_idx])
+            curr_idx = smallest
 
     def _up_heap_bubble(self):
 
@@ -72,7 +73,7 @@ class Heap:
         return first
 
     def peek_min(self) -> int:
-        if len(self) == 0:
+        if len(self._data) == 0:
             raise ValueError("Heap is empty! ")
         return self._data[0]
 

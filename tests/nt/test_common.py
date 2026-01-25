@@ -25,61 +25,39 @@ def test_get_nn_len_at_base17():
     assert get_nn_len_at_base(n=17**4, b=10) == 5
 
 
-def test_get_ith_last_remainder_of_number_repr_at_base2():
+def test_symbol_at_base2():
     nn_str: str = "101011"
     nn_str_rev: str = nn_str[::-1]
     nn: int = int(nn_str, 2)
     for i in range(len(nn_str)):
-        assert (
-                nn_str_rev[i] ==
-                symbol_at_base(nn, 2, i + 1)
-        )
+        assert nn_str_rev[i] == symbol_at_base(nn, 2, i + 1)
 
 
-def test_get_ith_last_remainder_of_number_repr_at_base3():
+def test_symbol_at_base3():
     nn_str: str = "121202"
     nn_str_rev: str = nn_str[::-1]
     nn: int = int(nn_str, base=3)
     for i in range(len(nn_str)):
-        assert (
-                nn_str_rev[i] ==
-                symbol_at_base(nn, 3, i + 1)
-        )
+        assert nn_str_rev[i] == symbol_at_base(nn, 3, i + 1)
 
 
-def test_get_ith_last_remainder_of_number_repr_at_base10():
+def test_symbol_at_base10():
     nn_str: str = "653911"
     nn_str_rev: str = nn_str[::-1]
     nn: int = int(nn_str)
     for i in range(len(nn_str)):
-        assert (
-                nn_str_rev[i] ==
-                symbol_at_base(nn, 10, i + 1)
-        )
+        assert nn_str_rev[i] == symbol_at_base(nn, 10, i + 1)
 
 
-def test_get_ith_last_remainder_of_number_repr_at_base17():
+def test_symbol_at_base17():
     nn_str: str = "GFEDCB12"
     nn_str_rev: str = nn_str[::-1]
     nn: int = (
-        2 * 17**0 +
-        1 * 17**1 +
-        11 * 17**2 +
-        12 * 17**3 +
-        13 * 17**4 +
-        14 * 17**5 +
-        15 * 17**6 +
-        16 * 17**7
+        2 * 17**0 + 1 * 17**1 + 11 * 17**2 + 12 * 17**3 +
+        13 * 17**4 + 14 * 17**5 + 15 * 17**6 + 16 * 17**7
     )
     for i in range(len(nn_str)):
-        assert (
-                nn_str_rev[i] ==
-                symbol_at_base(nn, 17, i + 1)
-        )
-
-
-def test_get_ith_last_remainder_of_number_repr_
-
+        assert nn_str_rev[i] == symbol_at_base(nn, 17, i + 1)
 
 
 def test_to_base2():

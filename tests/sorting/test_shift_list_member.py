@@ -1,4 +1,4 @@
-from pycs.algorithms.sorting.shift_list_member import shift_list_member
+from pycs.sorting.shift_list_member import shift_list_member
 
 from pytest import fixture
 

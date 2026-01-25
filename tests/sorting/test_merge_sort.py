@@ -1,6 +1,6 @@
 from copy import deepcopy
 
-from pycs.algorithms.sorting.merge_sort import merge_sort
+from pycs.sorting.merge_sort import merge_sort
 from pycs.common.testing import array_for_sorting
 
 

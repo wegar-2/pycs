@@ -1,4 +1,4 @@
-from pycs.algorithms.sorting.insert_sort import insert_sort
+from pycs.sorting.insert_sort import insert_sort
 from pycs.common.testing import array_for_sorting
 
 

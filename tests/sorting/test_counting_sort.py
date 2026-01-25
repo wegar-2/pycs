@@ -1,4 +1,4 @@
-from pycs.algorithms.sorting.counting_sort import counting_sort
+from pycs.sorting.counting_sort import counting_sort
 
 import random
 

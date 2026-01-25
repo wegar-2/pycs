@@ -19,6 +19,7 @@ def _counting_sort_at_base10(ar: array, digit_from_right: int) -> array:
 
     for i in reversed(range(len(ar))):
         sorted_ar[counts_ar[digits_ar[i]] - 1] = ar[i]
+        counts_ar[digits_ar[i]] -= 1
 
     return sorted_ar
 

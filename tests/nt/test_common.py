@@ -1,5 +1,5 @@
 from pycs.nt.common import (
-    get_ith_last_remainder_of_number_repr,
+    get_ith_last_symbol_for_base_repr,
     get_nn_len_at_base,
     to_base
 )
@@ -32,7 +32,7 @@ def test_get_ith_last_remainder_of_number_repr_at_base2():
     for i in range(len(nn_str)):
         assert (
                 nn_str_rev[i] ==
-                get_ith_last_remainder_of_number_repr(nn, 2, i+1)
+                get_ith_last_symbol_for_base_repr(nn, 2, i + 1)
         )
 
 
@@ -43,7 +43,7 @@ def test_get_ith_last_remainder_of_number_repr_at_base3():
     for i in range(len(nn_str)):
         assert (
                 nn_str_rev[i] ==
-                get_ith_last_remainder_of_number_repr(nn, 3, i + 1)
+                get_ith_last_symbol_for_base_repr(nn, 3, i + 1)
         )
 
 
@@ -54,7 +54,7 @@ def test_get_ith_last_remainder_of_number_repr_at_base10():
     for i in range(len(nn_str)):
         assert (
                 nn_str_rev[i] ==
-                get_ith_last_remainder_of_number_repr(nn, 10, i + 1)
+                get_ith_last_symbol_for_base_repr(nn, 10, i + 1)
         )
 
 
@@ -74,8 +74,12 @@ def test_get_ith_last_remainder_of_number_repr_at_base17():
     for i in range(len(nn_str)):
         assert (
                 nn_str_rev[i] ==
-                get_ith_last_remainder_of_number_repr(nn, 17, i + 1)
+                get_ith_last_symbol_for_base_repr(nn, 17, i + 1)
         )
+
+
+def test_get_ith_last_remainder_of_number_repr_
+
 
 
 def test_to_base2():

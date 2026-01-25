@@ -5,7 +5,8 @@ from pycs.common.types import Radix
 
 __all__ = [
     "get_nn_len_at_base",
-    "get_ith_last_remainder_of_number_repr",
+    "get_ith_last_digit_for_base_repr",
+    "get_ith_last_symbol_for_base_repr",
     "to_base"
 ]
 
@@ -35,13 +36,12 @@ def get_nn_len_at_base(
     return res
 
 
-def get_ith_last_remainder_of_number_repr(n: int, r: Radix, i: int) -> str:
-    if i > (base_repr_len := get_nn_len_at_base(n, r)):
-        raise ValueError(
-            f"Representation of {n=:_} at base {r=} is {base_repr_len},"
-            f"whereas {i}-th digit from the ends has been requested! "
-        )
-    return REMAINDER_TO_SYMBOL_MAP[(n // (r**(i-1))) % r]
+def get_ith_last_digit_for_base_repr(n: int, r: Radix, i: int) -> int:
+    return (n // (r ** (i - 1))) % r
+
+
+def get_ith_last_symbol_for_base_repr(n: int, r: Radix, i: int) -> str:
+    return REMAINDER_TO_SYMBOL_MAP[get_ith_last_digit_for_base_repr(n, r, i)]
 
 
 def to_base(n: int, r: Radix) -> str:

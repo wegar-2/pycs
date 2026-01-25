@@ -1,5 +1,7 @@
 from array import array
 
+from pycs.algorithms.sorting.counting_sort import counting_sort
+
 
 def _get_digit_at_base(n: int, radix: int = 2):
     pass
@@ -32,5 +34,16 @@ def radix_sort(nums: list[int]) -> list[int]:
 
     base10_max_len: int = max([len(str(x)) for x in nums])
     str_nums: list[str] = [str(x).rjust(base10_max_len, "0") for x in nums]
+
+    return nums
+
+
+def radix_sort_base10(nums: list[int]) -> list[int]:
+    base10_max_len: int = max([len(str(x)) for x in nums])
+
+    ar_nums: array = array("i", nums)
+
+
+
 
     return nums

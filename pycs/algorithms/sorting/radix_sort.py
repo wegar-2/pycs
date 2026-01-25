@@ -1,45 +1,31 @@
 from array import array
 
-from pycs.algorithms.sorting.counting_sort import counting_sort
+from pycs.nt.common import digit_at_base
 
 
-def _counting_sort(nums: list[int], digit: int) -> array:
-
-    ar: array = array("i", nums)
-    ar_max: int = max(ar)
+def _counting_sort_at_base10(ar: array, digit_from_right: int) -> array:
 
     sorted_ar: array = array("i", [0] * len(ar))
-    counts_ar: array = array("i", range(ar_max + 1))
+    counts_ar: array = array("i", [0] * 10)
 
-    digits_ar: array = array("i", ar)
+    digits_ar: array = array("i", [
+        digit_at_base(n=x, b=10, i=digit_from_right) for x in ar
+    ])
 
-    # for i
+    for digit in digits_ar:
+        counts_ar[digit] += 1
+    for i in range(1, 10, 1):
+        counts_ar[i] = counts_ar[i] + counts_ar[i-1]
+
+    for i in reversed(range(len(ar))):
+        sorted_ar[counts_ar[digits_ar[i]] - 1] = ar[i]
 
     return sorted_ar
 
 
-def _matrix_based_radix_sort(nums: list[int]) -> list[int]:
-    pass
-
-
-def _radix_sort(nums: list[int]) -> list[int]:
-    pass
-
-
 def radix_sort(nums: list[int]) -> list[int]:
-
-    base10_max_len: int = max([len(str(x)) for x in nums])
-    str_nums: list[str] = [str(x).rjust(base10_max_len, "0") for x in nums]
-
-    return nums
-
-
-def radix_sort_base10(nums: list[int]) -> list[int]:
-    base10_max_len: int = max([len(str(x)) for x in nums])
-
     ar_nums: array = array("i", nums)
-
-
-
-
-    return nums
+    base10_max_len: int = max([len(str(x)) for x in nums])
+    for digit in range(1, base10_max_len + 1, 1):
+        ar_nums = _counting_sort_at_base10(ar=ar_nums, digit_from_right=digit)
+    return list(ar_nums)

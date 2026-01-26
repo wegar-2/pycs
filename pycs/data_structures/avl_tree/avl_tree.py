@@ -106,15 +106,3 @@ class AVLTree:
             self._inorder(node.left, result)
             result.append(node.key)
             self._inorder(node.right, result)
-
-
-if __name__ == "__main__":
-
-    nums = [10, 8, 1, 9, 11, 15, 12, 13, 17, 2, 99, 7, 6, 3, 5, 4, 32, 45, 33]
-
-    tree = AVLTree()
-
-    for x in nums:
-        tree.insert(key=x)
-
-    print(f"{tree.inorder()=}")

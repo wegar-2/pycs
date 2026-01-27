@@ -7,13 +7,13 @@ class LinkedListNode:
     def __init__(
             self,
             key: int,
-            nxt: LinkedListNode,
             value: Optional[Any] = None,
+            nxt: Optional[LinkedListNode] = None,
             prv: Optional[LinkedListNode] = None,
     ):
         self._key: Final[int] = key
         self._value: Any = value
-        self._nxt: LinkedListNode = nxt
+        self._nxt: Optional[LinkedListNode] = nxt
         self._prv: Optional[LinkedListNode] = prv
 
     @property

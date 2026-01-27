@@ -83,20 +83,35 @@ class SinglyLinkedList:
             return self._first_node
         else:
             prev_node, curr_node = self._first_node, self._first_node.next
-            i = 1
-            while curr_node.next is not None:
-                if idx == i:
-                    node.next = curr_node
-                    prev_node.next = node
-                    break
-                prev_node, curr_node = curr_node, curr_node.next
-                i += 1
+            for i in range(1, idx + 1):
+                curr_node = curr_node.next
+                prev_node = curr_node
+            prev_node.next = curr_node.next
+            self._size -= 1
+            return curr_node
 
     def __getitem__(self, idx: int) -> LinkedListNode:
         self._validate_list_index(idx)
+        node = self._first_node
+        for i in range(1, idx + 1):
+            node = node.next
+        return node
 
     def __setitem__(self, idx, node: LinkedListNode) -> None:
         self._validate_list_index(idx)
+        self._validate_list_index(idx=idx)
+        if idx == 0:
+            node.next = self._first_node.next
+            self._first_node = node
+        else:
+            prev_node, curr_node = self._first_node, self._first_node.next
+            i = 1
+            while curr_node.next is not None:
+                if idx == i:
+                    node.next = curr_node.next
+                    prev_node.next = node
+                    break
+                prev_node, curr_node = curr_node, curr_node.next
 
     def __contains__(self, key: int) -> bool:
         if self._size == 0:

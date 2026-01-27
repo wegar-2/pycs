@@ -43,3 +43,6 @@ class LinkedListNode:
     @prev.setter
     def prev(self, prv: LinkedListNode):
         self._prv = prv
+
+    def __str__(self) -> str:
+        pass

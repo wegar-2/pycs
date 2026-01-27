@@ -1,4 +1,4 @@
-from pycs.data_structures.linked_list.ll_node import LinkedListNode
+from pycs.data_structures.linked_list.linked_list_node import LinkedListNode
 
 
 def test_init():

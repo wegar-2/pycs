@@ -127,13 +127,14 @@ class SinglyLinkedList:
 
     def __setitem__(self, idx, node: LinkedListNode) -> None:
         self._validate_list_index(idx)
+        node.prev = None
         if idx == 0:
             node.next = self._first_node.next
             self._first_node = node
         else:
-            prev_node, curr_node = self._first_node, self._first_node.next
-            i = 1
-            while curr_node.next is not None:
+            prev_node = self._first_node
+            curr_node = prev_node.next
+            for i in range(1, idx + 1):
                 if idx == i:
                     node.next = curr_node.next
                     prev_node.next = node

@@ -82,6 +82,7 @@ class SinglyLinkedList:
         if idx == 0:
             node.next = self._first_node
             self._first_node = node
+            self._size += 1
         elif idx == self._size:
             self.append(node)
         elif 1 <= idx <= self._size - 1:
@@ -94,9 +95,13 @@ class SinglyLinkedList:
                     break
                 prev_node, curr_node = curr_node, curr_node.next
                 i += 1
+            self._size += 1
         else:
-            raise IndexError(f"")
-        self._size += 1
+            raise IndexError(
+                f"Trying to insert into index {idx} which is behind end of "
+                f"sll of length {self._size}"
+            )
+
 
     def remove(self, idx: int) -> LinkedListNode: # noqa
         self._validate_list_index(idx=idx)
@@ -144,4 +149,6 @@ class SinglyLinkedList:
                 if node.key == key:
                     return True
                 node = node.next
+            if key == node.key:
+                return True
             return False

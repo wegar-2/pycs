@@ -41,12 +41,19 @@ class SinglyLinkedList:
     def pop_right(self) -> LinkedListNode | None:
         if self._size == 0:
             return None
+        elif self._size == 1:
+            node = self._first_node
+            self._size -= 1
+            self._first_node = None
+            self._last_node = None
+            return node
         else:
             prev_node = self._first_node
-            curr_node = prev_node.next
-            while curr_node is not None:
+            curr_node = self._first_node.next
+            while curr_node.next is not None:
                 prev_node = curr_node
-                curr_node = curr_node.next
+                curr_node = prev_node.next
+            prev_node.next = None
             self._last_node = prev_node
             self._size -= 1
             return curr_node

@@ -64,6 +64,7 @@ class SinglyLinkedList:
         else:
             node = self._first_node
             self._first_node = node.next
+            node.next = None
             self._size -= 1
             return node
 

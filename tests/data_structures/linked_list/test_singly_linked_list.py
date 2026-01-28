@@ -24,6 +24,10 @@ def test_init():
     assert len(sll) == 1
     assert sll.first_node == first
     assert sll.last_node == first
+    second = LinkedListNode(key=333)
+    sll.append(second)
+    assert len(sll) == 2
+    assert
 
 
 def test_first_last_node():

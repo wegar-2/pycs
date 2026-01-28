@@ -45,4 +45,4 @@ class LinkedListNode:
         self._prv = prv
 
     def __str__(self) -> str:
-        pass
+        return f"LinkedListNode(key={self._key}, value{self._value}, ...)"

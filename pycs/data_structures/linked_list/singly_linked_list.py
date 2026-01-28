@@ -1,20 +1,8 @@
 from pycs.data_structures.linked_list.linked_list_node import LinkedListNode
+from pycs.data_structures.linked_list.linked_list import LinkedList
 
 
-class SinglyLinkedList:
-
-    def __init__(self):
-        self._first_node: LinkedListNode | None = None
-        self._last_node: LinkedListNode | None = None
-        self._size: int = 0
-
-    @property
-    def first_node(self) -> LinkedListNode | None:
-        return self._first_node
-
-    @property
-    def last_node(self) -> LinkedListNode | None:
-        return self._last_node
+class SinglyLinkedList(LinkedList):
 
     def get_keys(self) -> list[int]:
         keys: list[int] = []
@@ -22,9 +10,6 @@ class SinglyLinkedList:
         while node.next is not None:
             keys.append(node.key)
         return keys
-
-    def __len__(self) -> int:
-        return self._size
 
     def append(self, node: LinkedListNode):
         node.prev = None
@@ -68,17 +53,6 @@ class SinglyLinkedList:
             self._size -= 1
             return node
 
-    def _validate_list_index(self, idx: int) -> None:
-        if self._size == 0:
-            raise IndexError(
-                f"Trying to access index {idx} of an empty array! ")
-        else:
-            if not 0 <= idx <= (last_correct_idx := self._size - 1):
-                raise IndexError(
-                    f"Trying to access index {idx} - the index is out of the "
-                    f"range of valid indexes [0, ..., {last_correct_idx}]"
-                )
-
     def insert(self, idx: int, node: LinkedListNode) -> None:
         if idx == 0:
             node.next = self._first_node
@@ -103,7 +77,6 @@ class SinglyLinkedList:
                 f"sll of length {self._size}"
             )
 
-
     def remove(self, idx: int) -> LinkedListNode: # noqa
         self._validate_list_index(idx=idx)
         if idx == 0:
@@ -118,13 +91,6 @@ class SinglyLinkedList:
             prev_node.next = curr_node.next
             self._size -= 1
             return curr_node
-
-    def __getitem__(self, idx: int) -> LinkedListNode:
-        self._validate_list_index(idx)
-        node = self._first_node
-        for i in range(1, idx + 1):
-            node = node.next
-        return node
 
     def __setitem__(self, idx, node: LinkedListNode) -> None:
         self._validate_list_index(idx)
@@ -141,16 +107,3 @@ class SinglyLinkedList:
                     prev_node.next = node
                     break
                 prev_node, curr_node = curr_node, curr_node.next
-
-    def __contains__(self, key: int) -> bool:
-        if self._size == 0:
-            return False
-        else:
-            node = self._first_node
-            while node.next is not None:
-                if node.key == key:
-                    return True
-                node = node.next
-            if key == node.key:
-                return True
-            return False

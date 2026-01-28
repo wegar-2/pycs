@@ -89,6 +89,8 @@ class DoublyLinkedList(LinkedList):
                 curr_node = curr_node.next
                 prev_node = curr_node
             prev_node.next = curr_node.next
+            if curr_node.next is not None:
+                curr_node.next = prev_node
             self._size -= 1
             return curr_node
 
@@ -103,7 +105,10 @@ class DoublyLinkedList(LinkedList):
             curr_node = prev_node.next
             for i in range(1, idx + 1):
                 if idx == i:
+                    if curr_node.next is not None:
+                        curr_node.next.prev = node
                     node.next = curr_node.next
+                    node.prev = prev_node
                     prev_node.next = node
                     break
                 prev_node, curr_node = curr_node, curr_node.next

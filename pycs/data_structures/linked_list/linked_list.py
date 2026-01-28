@@ -49,3 +49,10 @@ class LinkedList:
         for i in range(1, idx + 1):
             node = node.next
         return node
+
+    def get_keys(self) -> list[int]:
+        keys: list[int] = []
+        node = self._first_node
+        while node.next is not None:
+            keys.append(node.key)
+        return keys

@@ -4,13 +4,6 @@ from pycs.data_structures.linked_list.linked_list import LinkedList
 
 class DoublyLinkedList(LinkedList):
 
-    def get_keys(self) -> list[int]:
-        keys: list[int] = []
-        node = self._first_node
-        while node.next is not None:
-            keys.append(node.key)
-        return keys
-
     def append(self, node: LinkedListNode):
         node.next = None
         if self._size == 0:
@@ -46,8 +39,9 @@ class DoublyLinkedList(LinkedList):
         else:
             node = self._first_node
             self._first_node = node.next
-            self._first_node.prev = None
             self._size -= 1
+            if self._size >= 1:
+                self._first_node.prev = None
             node.next = None
             return node
 

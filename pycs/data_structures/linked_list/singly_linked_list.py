@@ -4,13 +4,6 @@ from pycs.data_structures.linked_list.linked_list import LinkedList
 
 class SinglyLinkedList(LinkedList):
 
-    def get_keys(self) -> list[int]:
-        keys: list[int] = []
-        node = self._first_node
-        while node.next is not None:
-            keys.append(node.key)
-        return keys
-
     def append(self, node: LinkedListNode):
         node.prev = None
         if self._size == 0:

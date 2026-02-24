@@ -8,9 +8,12 @@ Investigating select aspects of CS in Python.
 
 
 Contents - subpackages of `pycs`:
-1. [`algorithms`](./pycs/algorithms) - implementations of select algorithms
-2. [`bybi`](./pycs/bybi) - working with bits and bytes
-3. [`common`](./pycs/common) - resources for the whole pacakge
-4. [`osapi`](./pycs/osapi) - interfacing with OS, file system, working with zips, etc.
-5. [`data_structures`](./pycs/data_structures) - implementation of select ADTs
-
+1. [`bybi`](./pycs/bybi) - working with bits and bytes
+2. [`common`](./pycs/common) - resources for the whole pacakge
+3. [`osapi`](./pycs/osapi) - interfacing with OS, file system, working with zips, etc.
+4. [`data_structures`](./pycs/data_structures) - implementation of select ADTs
+5. [`sm`](./pycs/sm) - string matching algorithms
+6. [`graph`](./pycs/graph) - various implementations of graph 
+(adjacency list/map/matrix, edge list) and graph algorithms (DFS, BFS)
+7. [`sorting`](./pycs/sorting) - various sorting algorithms
+(counting, insert, merge, radix)

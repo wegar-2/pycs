@@ -1,9 +1,7 @@
 [project]
 name = "pycs"
 version = "0.0.1"
-description = """
-Computer science in Python
-"""
+description = "Data structures and algorithms in Python"
 readme = "README.md"
 requires-python = ">=3.12"
 keywords = ["data-structures", "ds", "algorithms"]

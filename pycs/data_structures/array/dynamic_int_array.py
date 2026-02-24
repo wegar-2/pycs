@@ -39,7 +39,8 @@ class DynamicIntArray:
         pass
 
     def _enlarge(self):
-        new_array = array("i")
+        # new_array = array("i")
+        pass
 
     def _shrink(self):
         pass

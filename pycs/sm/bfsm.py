@@ -7,7 +7,7 @@ def bfsm(text: str, pattern: str) -> list[int]:
     if not isinstance(text, str):
         raise TypeError("Invalid text passed - not a string")
     if not isinstance(pattern, str):
-        raise TypeError(f"Invalid pattern passed - not a string")
+        raise TypeError("Invalid pattern passed - not a string")
     if len(text) < len(pattern):
         raise ValueError("Inconsistent lengths of text and pattern: "
                          "text shorter than the text! ")

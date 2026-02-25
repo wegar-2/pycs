@@ -1,5 +1,5 @@
 
-__all__ = ["validate_sm_inputs"]
+__all__ = ["python_sm", "validate_sm_inputs"]
 
 
 def validate_sm_inputs(text: str, pattern: str) -> None:
@@ -10,3 +10,15 @@ def validate_sm_inputs(text: str, pattern: str) -> None:
     if len(text) < len(pattern):
         raise ValueError("Inconsistent lengths of text and pattern: "
                          "text shorter than the text! ")
+
+
+def python_sm(text: str, pattern: str) -> list[int]:
+    positions: list[int] = []
+    while len(text) > 0:
+        next_ = text.find(pattern)
+        if next_ != -1:
+            positions.append(next_)
+            text = text[next_+1:]
+        else:
+            break
+    return positions

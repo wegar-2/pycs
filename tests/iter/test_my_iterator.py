@@ -10,4 +10,3 @@ def test_my_iterator():
         data_recovered.append(el)
 
     assert data == data_recovered
-    

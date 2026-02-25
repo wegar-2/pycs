@@ -12,7 +12,8 @@ from pycs.bybi.src import (
 
 def test_symbol_to_bitarray_on_ascii_symbol():
     symbol: str = "q"
-    symbol_ba: bitarray = encode_symbol_to_bitarray(symbol=symbol, encoding="ascii")
+    symbol_ba: bitarray = encode_symbol_to_bitarray(
+        symbol=symbol, encoding="ascii")
     assert ord(symbol) == int("".join([str(x) for x in symbol_ba]), base=2)
 
 
@@ -24,8 +25,10 @@ def test_encode_decode_symbol_ascii():
 
 
 def test_encode_decode_symbol_utf8():
-    polish_a_ba: bitarray = encode_symbol_to_bitarray(symbol="ą", encoding="utf8")
-    polish_a_recov: str = decode_bitarray_symbol_repr(ba=polish_a_ba, encoding="utf8")
+    polish_a_ba: bitarray = encode_symbol_to_bitarray(
+        symbol="ą", encoding="utf8")
+    polish_a_recov: str = decode_bitarray_symbol_repr(
+        ba=polish_a_ba, encoding="utf8")
     assert "ą" == polish_a_recov
 
 

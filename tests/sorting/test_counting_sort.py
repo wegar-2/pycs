@@ -4,6 +4,7 @@ import random
 
 from pytest import raises
 
+
 def _generate_nums(len_: int = 10_000, upper_bound: int = 1_000) -> list[int]:
     random.seed(123)
     return [random.randint(a=1, b=upper_bound) for _ in range(len_)]
